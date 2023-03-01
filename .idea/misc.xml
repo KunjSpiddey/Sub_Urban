@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/drawable/dots.xml" value="0.1" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/drawable/ic_account.xml" value="0.193" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.197" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.193" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/drawable/ic_baseline_logout_24.xml" value="0.193" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1795" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.197" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/drawable/ic_logout.xml" value="0.193" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/drawable/item.xml" value="0.198" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_bag.xml" value="0.152" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_belt.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_cart.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_goggles.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_hat.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_home.xml" value="0.264" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_main2.xml" value="0.2" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_perfume.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_pick.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_polo.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_round.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_shirt.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_shoes.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_tie.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_watch.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/activity_wishlist.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/fragment_first.xml" value="0.22864583333333333" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/fragment_second.xml" value="0.21458333333333332" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/fragment_third.xml" value="0.22864583333333333" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/header_file.xml" value="0.23125" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/item.xml" value="0.25" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/layout/menu_nav.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/menu/bmenu.xml" value="0.22760416666666666" />
+        <entry key="..\:/Users/Kunj Koradiya/Desktop/SubUrban/app/src/main/res/menu/menu.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Embedded JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.264" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "361743147996",
+    "project_id": "vi-clothing",
+    "storage_bucket": "vi-clothing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361743147996:android:71d4f3511779889fc86519",
+        "android_client_info": {
+          "package_name": "com.example.suburban"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "361743147996-tlhml2u0t83k6hh8a59l12abf6d7t6q6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.suburban",
+            "certificate_hash": "bcda6d6a50af0e14d5bb1462644739d27cd43f8f"
+          }
+        },
+        {
+          "client_id": "361743147996-a13ugubstu7q7k6n3pidju6ppr6ibgrl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx2sTqmJKJaqNPfhc0ANsx4uPWbPmWmZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "361743147996-a13ugubstu7q7k6n3pidju6ppr6ibgrl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
