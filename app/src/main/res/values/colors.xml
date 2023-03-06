@@ -15,11 +15,14 @@
     <color name="green">#4CAF50</color>
     <color name="darkgreen">#2E7D32</color>
     <color name="mendi">#676a01</color>
+
+
     ////////////////////////////
     <color name="white">#FFFFFFFF</color>
     <color name="Grey_Color">#2b6777</color>
     <color name="light_blue">#c8d8e4</color>
     <color name="light_grey">#f2f2f2 </color>
     <color name="pestal_green">#52ab98 </color>
+    <color name="Dark_grey">#3D3D3D</color>
 
 </resources>

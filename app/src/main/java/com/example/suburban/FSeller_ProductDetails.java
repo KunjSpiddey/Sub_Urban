@@ -24,13 +24,8 @@ public class FSeller_ProductDetails extends Fragment {
                              Bundle savedInstanceState) {
       View view = inflater.inflate(R.layout.fragment_f_seller__product_details, container, false);
 
-        AppCompatButton button = (AppCompatButton)view.findViewById(R.id.product_id_next);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              fl(new FSeller_DashBoard(),1);
-            }
-        });
+
+
 
         return view;
     }

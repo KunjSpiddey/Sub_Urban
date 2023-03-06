@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/header_main"
-    android:background="@color/grey"
-    android:backgroundTint="#A1AED6DC">
+    android:background="#CBE4E8">
 
 
     <ImageView

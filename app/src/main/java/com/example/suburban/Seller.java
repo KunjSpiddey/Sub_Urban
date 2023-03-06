@@ -35,14 +35,14 @@ public class Seller extends AppCompatActivity {
     }
 
 
-//    public void onBackPressed() {
-//
-//        if(getSupportFragmentManager().getBackStackEntryCount() > 0)
-//            getSupportFragmentManager().popBackStack();
-//        else {
-//           startActivity(new Intent(Seller.this,Home.class));
-//           finish();
-//        }
-//    }
+ public void onBackPressed() {
+
+     if(getSupportFragmentManager().getBackStackEntryCount() > 0)
+         getSupportFragmentManager().popBackStack();
+     else {
+        startActivity(new Intent(Seller.this,Home.class));
+        finish();
+     }
+ }
 
     }
