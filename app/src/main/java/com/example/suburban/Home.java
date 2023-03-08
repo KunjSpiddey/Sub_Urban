@@ -27,6 +27,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 public class Home extends AppCompatActivity{
@@ -55,8 +56,8 @@ public class Home extends AppCompatActivity{
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.showOverflowMenu();
-
-
+        FirebaseAuth firebaseAuth;
+        firebaseAuth = FirebaseAuth.getInstance();
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -104,9 +105,8 @@ public class Home extends AppCompatActivity{
                     finish();
                     break;
                 case R.id.nav_logout:
-                    Intent logout = new Intent(getApplicationContext(),Login_Activity.class);
-                    startActivity(logout);
-                    finish();
+                    firebaseAuth.signOut();;
+                    signOutUser();
                     break;
                 case R.id.terms_and_condition:
                     fragmentLoader(new TermsAndConditionFragment(), 1);
@@ -126,6 +126,13 @@ public class Home extends AppCompatActivity{
             return true;
         });
 
+    }
+
+    private void signOutUser() {
+        Intent logout = new Intent(getApplicationContext(),Login_Activity.class);
+        logout.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(logout);
+        finish();
     }
 
     private void fragmentLoader(Fragment fragment, int flag) {
