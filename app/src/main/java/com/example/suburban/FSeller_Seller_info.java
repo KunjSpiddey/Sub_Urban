@@ -5,6 +5,7 @@ import static com.example.suburban.R.array.default_City;
 
 import android.os.Bundle;
 
+import androidx.annotation.ContentView;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.ScrollingTabContainerView;
 import androidx.fragment.app.Fragment;
@@ -21,8 +22,9 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-public class FSeller_Seller_info extends Fragment {
+import com.example.suburban.databinding.FragmentFSellerSellerInfoBinding;
 
+public class FSeller_Seller_info extends Fragment {
     String Selected_state , Selected_city;
     ArrayAdapter<CharSequence> city_adapter;
     public FSeller_Seller_info() {
@@ -38,9 +40,10 @@ public class FSeller_Seller_info extends Fragment {
        Button button = (Button)view.findViewById(R.id.seller_info_next);
        Spinner city = (Spinner)view.findViewById(R.id.city);
        Spinner state = (Spinner)view.findViewById(R.id.state);
+
+
 String [] states_india = getResources().getStringArray(india_states);
 String [] default_city = getResources().getStringArray(default_City);
-
 String [] andrapradesh = getResources().getStringArray(R.array.andhra_pradesh_cities);
 String [] arunachal = getResources().getStringArray(R.array.arunachal_pradesh_cities);
 String [] assam = getResources().getStringArray(R.array.assam_cities);
@@ -223,6 +226,8 @@ String [] westbengal = getResources().getStringArray(R.array.west_bengal_cities)
                 ft.commit();
             }
         });
+
+
 
         return view;
     }

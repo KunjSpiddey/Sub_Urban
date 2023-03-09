@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/aladin"
         android:text="Login"
+        android:layout_marginTop="35dp"
         android:textColor="#000000"
         android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,26 +25,28 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="299dp"
-        android:layout_height="196dp"
+        android:layout_width="300dp"
+        android:layout_height="194dp"
+        android:paddingTop="80dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084"
-        app:srcCompat="@drawable/real" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/sub" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_button"
         android:layout_width="102dp"
         android:layout_height="49dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/liok"
-        android:backgroundTint="#8BC34A"
-        android:backgroundTintMode="src_in"
-        android:foregroundTint="#000000"
-        android:foregroundTintMode="src_atop"
+        android:backgroundTint="@color/Dark_grey"
         android:text="Login"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -56,6 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.0"
@@ -100,7 +104,7 @@
                     android:paddingTop="10dp"
                     android:gravity="end"
                     android:text="Create a new account "
-                    android:textColor="#E91E63"
+                    android:textColor="#0D1B62"
                     android:textSize="016dp"
                     android:textStyle="normal|italic" />
             </com.google.android.material.textfield.TextInputLayout>

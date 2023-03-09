@@ -10,15 +10,18 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="224dp"
-        android:layout_height="225dp"
+        android:layout_width="300dp"
+        android:layout_height="194dp"
+        android:paddingTop="80dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.047"
-        app:srcCompat="@drawable/real" />
+        app:srcCompat="@drawable/sub" />
 
     <TextView
         android:id="@+id/register_word"
@@ -26,15 +29,16 @@
         android:layout_height="62dp"
         android:fontFamily="@font/aladin"
         android:gravity="center"
+        android:paddingTop="10dp"
         android:text="Registration"
         android:textColor="#000000"
         android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.279" />
+        app:layout_constraintVertical_bias="0.357" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -46,7 +50,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        app:layout_constraintVertical_bias="0.268">
+        app:layout_constraintVertical_bias="0.747">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -99,14 +103,19 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/registeration_button"
-        android:layout_width="102dp"
-        android:layout_height="49dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/liok"
-        android:backgroundTint="#009688"
+        android:backgroundTint="@color/Dark_grey"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:text="Register"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.782"
-        tools:layout_editor_absoluteX="154dp" />
+        app:layout_constraintVertical_bias="0.846" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

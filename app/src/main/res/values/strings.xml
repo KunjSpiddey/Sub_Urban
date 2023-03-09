@@ -275,7 +275,6 @@
     </string-array>
 
 
-
     <string-array name="haryana_cities">
         <item>Ambala</item>
         <item>Bhiwani</item>
@@ -300,7 +299,6 @@
         <item>Sonipat</item>
         <item>Yamunanagar</item>
     </string-array>
-
 
 
     <string-array name="himachal_pradesh_cities">
@@ -896,7 +894,6 @@
     </string-array>
 
 
-
     <string-array name="uttarakhand_cities">
         <item>Almora</item>
         <item>Bageshwar</item>
@@ -912,8 +909,6 @@
         <item>Udham Singh Nagar</item>
         <item>Uttarkashi</item>
     </string-array>
-
-
 
 
     <string-array name="west_bengal_cities">
