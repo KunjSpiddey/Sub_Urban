@@ -26,8 +26,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class Registration extends AppCompatActivity {
     private ActivityRegistrationBinding binding;
     private FirebaseAuth firebaseAuth ;
-    EditText username,email1,password1;
-    private  String email= "",password = "";
+    EditText confirmpass2,email1,password1;
+    private  String email= "",password = "", confirmpass ="" ,mobile ="";
     private ProgressDialog progressDialog;
     private ActionBar actionBar;
     //    private FirebaseDatabase firebaseDatabase;
@@ -52,8 +52,10 @@ public class Registration extends AppCompatActivity {
 //        actionBar.setTitle("Sign up");
 //        actionBar.setDisplayShowHomeEnabled(true);
 
+
+
         Button btn = findViewById(R.id.registeration_button);
-        username = findViewById(R.id.registration_username);
+        confirmpass2 = findViewById(R.id.confirm_password);
         email1 = findViewById(R.id.registration_mail);
         password1 = findViewById(R.id.registration_password);
 
@@ -65,39 +67,36 @@ public class Registration extends AppCompatActivity {
 
         });
 
-//      btn = findViewById(R.id.registeration_button);
-//        if (getSupportActionBar() != null) {
-//            getSupportActionBar().hide();
-//        }
-//
-//    btn.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//           Intent intent=new Intent(Registration.this,Home.class);
-//           startActivity(intent);
-//        }
-//    });
     }
     private void validatedata(){
         //get data
+
         email=binding.registrationMail.getText().toString().trim();
         password= binding.registrationPassword.getText().toString().trim();
-
+        confirmpass = binding.confirmPassword.getText().toString().trim();
+        mobile = binding.registrationMobile.getText().toString().trim();
         //validate data
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() && TextUtils.isEmpty(password)) {
             // no password is entered
-            binding.registerationButton.setError("Invalid email format");
+            binding.invalidMail.setVisibility(View.VISIBLE);
         }
-        else if(TextUtils.isEmpty(password)){
-            binding.registrationMail.setError("Enter password");
+        else if(TextUtils.isEmpty(mobile)){
+                binding.invalidMobile.setVisibility(View.VISIBLE);
         }
         else if(password.length()<6){
             //password less than 6
 
-            binding.registrationPassword.setError("Password must atleast 6 character ");
-        }
-        else{
+          binding.lettersError.setVisibility(View.VISIBLE);
+        } else if (password != confirmpass) {
+
+            binding.notMatch.setVisibility(View.VISIBLE);
+
+        } else{
+            binding.invalidMail.setVisibility(View.GONE);
+            binding.invalidMobile.setVisibility(View.GONE);
+            binding.lettersError.setVisibility(View.GONE);
+            binding.notMatch.setVisibility(View.GONE);
             //data is valid now continue
             firebaseSignup();
         }

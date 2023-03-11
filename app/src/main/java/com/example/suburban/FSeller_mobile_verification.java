@@ -39,10 +39,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
 
 public class FSeller_mobile_verification extends Fragment {
-    FirebaseAuth mAuth;
-    String otpid;
-    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
-    String number;
+
 
     public FSeller_mobile_verification() {
 
@@ -52,76 +49,6 @@ public class FSeller_mobile_verification extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_f_seller_mobile_verification, container, false);
-        EditText mobile_number = view.findViewById(R.id.mobile_number);
-        AppCompatButton SEND_OTP = view.findViewById(R.id.OTP);
-        ImageView img = view.findViewById(R.id.verification_Image);
-        ProgressBar progressBar = view.findViewById(R.id.progress_bar);
-        mAuth = FirebaseAuth.getInstance();
-
-
-
-        Bundle bundle = new Bundle();
-        bundle.putString("User_Number", number);
-        SEND_OTP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (mobile_number.getText().toString().isEmpty()) {
-                    mobile_number.setError("Enter the Number");
-                } else if (mobile_number.getText().toString().length() != 10) {
-                    mobile_number.setError("Enter Valid Mobile Number");
-                } else {
-
-                    progressBar.setVisibility(VISIBLE);
-                    SEND_OTP.setVisibility(View.GONE);
-
-                    PhoneAuthOptions options =
-                            PhoneAuthOptions.newBuilder(mAuth)
-                                    .setPhoneNumber("+91"+mobile_number.getText().toString())       // Phone number to verify
-                                    .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                                    .setActivity(requireActivity())                 // Activity (for callback binding)
-                                    .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-                                        @Override
-                                        public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
-
-                                        }
-
-                                        @Override
-                                        public void onVerificationFailed(@NonNull FirebaseException e) {
-
-                                        }
-
-                                        @Override
-                                        public void onCodeSent(@NonNull String otp,
-                                                               @NonNull PhoneAuthProvider.ForceResendingToken token) {
-
-                                            otpid = otp;
-                                            number = mobile_number.getText().toString();
-                                            Bundle bundle = new Bundle();
-                                            bundle.putString("OTP",otpid);
-                                            bundle.putString("User_Number", number);
-                                            FragmentManager fm = getParentFragmentManager();
-                                            FragmentTransaction ft = fm.beginTransaction();
-                                            OTPFragment otpFragment = new OTPFragment();
-                                            otpFragment.setArguments(bundle);
-                                            ft.replace(R.id.seller_container, otpFragment);
-                                            ft.addToBackStack(null);
-                                            ft.commit();
-
-                                        }
-                                    })
-                                    .build();
-                    PhoneAuthProvider.verifyPhoneNumber(options);
-////////////////
-
-
-///////////////////
-
-                }
-
-            }
-        });
 
 
         return view;

@@ -12,80 +12,99 @@
         android:id="@+id/imageView6"
         android:layout_width="300dp"
         android:layout_height="194dp"
+        android:layout_marginTop="10dp"
         android:paddingTop="80dp"
-        android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.047"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/sub" />
-
-    <TextView
-        android:id="@+id/register_word"
-        android:layout_width="188dp"
-        android:layout_height="62dp"
-        android:fontFamily="@font/aladin"
-        android:gravity="center"
-        android:paddingTop="10dp"
-        android:text="Registration"
-        android:textColor="#000000"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.357" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/registeration_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        app:layout_constraintVertical_bias="0.747">
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/register_word"
+            android:layout_width="188dp"
+            android:layout_height="62dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/aladin"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="Registration"
+            android:textColor="#000000"
+            android:textSize="40dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_marginTop="5dp"
             app:boxBackgroundColor="#FFFFFF">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/registration_username"
+                android:id="@+id/registration_mail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="UserName"
+                android:hint="E-Mail"
                 android:textColor="#000000" />
+            <TextView
+                android:id="@+id/invalid_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter Valid Mail"
+                android:layout_marginLeft="5dp"
+                android:textColor="#D14848"
+                android:gravity="center"
+                android:drawableLeft="@drawable/baseline_error_24"
+                android:visibility="gone"/>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 app:boxBackgroundColor="#FFFFFF">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/registration_mail"
+                    android:id="@+id/registration_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="E-Mail"
+                    android:hint="Mobile_Number"
                     android:inputType="textEmailAddress"
                     android:textColor="#000000" />
+                <TextView
+                    android:id="@+id/invalid_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enter Valid Mobile Number"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#D14848"
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/baseline_error_24"
+                    android:visibility="gone"/>
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     app:boxBackgroundColor="#FFFFFF"
                     app:endIconMode="password_toggle">
 
@@ -94,8 +113,50 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Password"
-
                         android:inputType="textPassword" />
+                    <TextView
+                        android:id="@+id/letters_error"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Password must be atleast 6 character"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#D14848"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/baseline_error_24"
+                        android:visibility="gone"/>
+
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        app:boxBackgroundColor="@color/white"
+                        app:endIconMode="password_toggle">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/confirm_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Confirm password"
+                            android:inputType="textPassword" />
+                        <TextView
+                            android:id="@+id/not_match"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Password does't match"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="#D14848"
+                            android:gravity="center"
+                            android:drawableLeft="@drawable/baseline_error_24"
+                            android:visibility="gone"/>
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.textfield.TextInputLayout>
         </com.google.android.material.textfield.TextInputLayout>
@@ -115,7 +176,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.846" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.415" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

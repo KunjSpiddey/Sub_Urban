@@ -329,22 +329,6 @@
                         android:textColorHint="#949494"
                         android:textSize="16sp" />
 </androidx.cardview.widget.CardView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginTop="5dp"
-                        android:text="Pin Code"
-                        android:textColor="@color/Dark_grey" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/black_border"
-                        android:padding="10dp"
-                        android:textColorHint="#949494"
-                        android:textSize="16sp" />
 
 
 
@@ -453,17 +437,12 @@
                         android:background="@color/light_grey"
                         android:backgroundTint="@color/light_grey" />
 
-
-
-
-
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
                         android:layout_marginTop="10dp"
-                        android:text="Choose The Shipping Method"
+                        android:text="The Shipping Method"
                         android:textColor="#797979"
                         android:textSize="20dp"
                         android:textStyle="bold" />
@@ -476,10 +455,6 @@
                         android:orientation="vertical">
 
 
-                        <RadioGroup
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
 
 
                             <LinearLayout
@@ -491,40 +466,8 @@
                                 android:backgroundTint="@color/light_grey"
                                 android:orientation="horizontal">
 
-                                <RadioButton
-                                    android:id="@+id/suburban_delivery"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="80dp"
-                                    android:layout_margin="10dp"
-                                    android:drawableStart="@drawable/suburban_delivery"
-                                    android:padding="10dp" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="10dp"
-                                        android:text="Sub Urban Easy Ship"
-                                        android:textColor="@color/black"
-                                        android:textSize="16sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="10dp"
-                                        android:layout_marginRight="5dp"
-                                        android:layout_marginBottom="5dp"
-                                        android:text="You Stored and packed orders at your location. Sub Urban will pick them and deliver to the customer"
-                                        android:textColor="@color/Dark_grey"
-                                        android:textSize="14sp" />
 
 
-                                </LinearLayout>
                             </LinearLayout>
 
 
@@ -537,12 +480,12 @@
                                 android:backgroundTint="@color/light_grey"
                                 android:orientation="horizontal">
 
-                                <RadioButton
+                                <ImageView
                                     android:id="@+id/self_delivery"
                                     android:layout_width="wrap_content"
                                     android:layout_height="80dp"
                                     android:layout_margin="10dp"
-                                    android:drawableStart="@drawable/self_delivery"
+                                    android:src="@drawable/self_delivery"
                                     android:padding="10dp" />
 
                                 <LinearLayout
@@ -574,7 +517,6 @@
                             </LinearLayout>
 
 
-                        </RadioGroup>
 
                     </LinearLayout>
 
