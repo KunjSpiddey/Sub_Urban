@@ -51,7 +51,7 @@ public class FSeller_mobile_verification extends Fragment {
         View view = inflater.inflate(R.layout.fragment_f_seller_mobile_verification, container, false);
 
 
-        return view;
+        return view;//
     }
 
 
