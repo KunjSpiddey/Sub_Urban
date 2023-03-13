@@ -111,9 +111,6 @@ public class Home extends AppCompatActivity{
                 case R.id.terms_and_condition:
                     fragmentLoader(new TermsAndConditionFragment(), 1);
                     break;
-                case R.id.privacy:
-                    fragmentLoader(new Privacy_Fragment(), 1);
-                    break;
                 case R.id.share:
                     Toast.makeText(Home.this, "Share", Toast.LENGTH_SHORT).show();
                     break;
