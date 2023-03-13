@@ -53,7 +53,7 @@ public class FSeller_mobile_verification extends Fragment {
 
         return view;//
     }
-
+//////////
 
     private void fl(Fragment fragment, int flag) {
         FragmentManager fm = getParentFragmentManager();
