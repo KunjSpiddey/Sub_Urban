@@ -119,7 +119,7 @@ public class FSeller_ProductDetails extends Fragment {
 
                    Adapter_Product_type.setDropDownViewResource(com.tbuonomo.viewpagerdotsindicator.R.layout.support_simple_spinner_dropdown_item);
 //                 Adapter_Product_type.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
-                   p_type.setAdapter(Adapter_Product_type);
+                   p_type.setAdapter(Adapter_Product_type);//
                 }
             }
 
