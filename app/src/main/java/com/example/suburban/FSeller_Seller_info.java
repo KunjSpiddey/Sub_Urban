@@ -198,17 +198,21 @@ String [] westbengal = getResources().getStringArray(R.array.west_bengal_cities)
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getParentFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.add(R.id.seller_container, new FSeller_ProductDetails());
-                ft.replace(R.id.seller_container , new FSeller_ProductDetails());
-                ft.addToBackStack(null);
-                ft.commit();
+           fl(new FSeller_ProductDetails(),1);
             }
         });
 
 
 
         return view;
+    }
+
+    private void fl(Fragment fragment, int flag) {
+        FragmentManager fm = getParentFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.seller_container, fragment);
+        ft.replace(R.id.seller_container, fragment);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 }

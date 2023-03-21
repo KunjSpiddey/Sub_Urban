@@ -50,6 +50,22 @@ public class FSeller_mobile_verification extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_f_seller_mobile_verification, container, false);
 
+        AppCompatButton Seller_login = view.findViewById(R.id.Seller_Login);
+
+
+
+
+
+
+
+
+        Seller_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fl(new FSeller_Seller_info(),1);
+            }
+        });
+
 
         return view;//
     }
