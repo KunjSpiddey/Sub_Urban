@@ -30,7 +30,7 @@ public class ViewAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer[] images={R.drawable.show,R.drawable.tuxeda,R.drawable.winter,R.drawable.man,R.drawable.shoess};
+    private Integer[] images={R.drawable.show,R.drawable.tuxeda,R.drawable.show,R.drawable.man,R.drawable.shoess};
 
 
 
