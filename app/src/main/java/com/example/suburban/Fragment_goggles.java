@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -28,11 +30,12 @@ public class Fragment_goggles extends Fragment {
     private MyAdapter adapter;
     private GridView gridView;
 
-    private ArrayList<addedProducts> dataList;
+    private ImageView wishlist;
+    private ArrayList<addedProducts> dataList = new ArrayList<>();
 
-    final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Images");
+    final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("products");
 
-
+    Query query = databaseReference.orderByChild("productType").equalTo("Goggles");
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -41,12 +44,13 @@ public class Fragment_goggles extends Fragment {
          gridView = view.findViewById(R.id.grid_view);
          adapter = new MyAdapter(getContext(),dataList);
          gridView.setAdapter(adapter);
-        databaseReference.addValueEventListener(new ValueEventListener() {
+
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    addedProducts addedProducts = dataSnapshot.getValue(addedProducts.class);
-                    dataList.add(addedProducts);
+                    addedProducts add = dataSnapshot.getValue(addedProducts.class);
+                    dataList.add(add);
 
                 }
 

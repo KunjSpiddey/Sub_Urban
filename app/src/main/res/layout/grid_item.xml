@@ -9,54 +9,88 @@
     android:gravity="center">
 
 
-
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:cardElevation="10dp"
-        app:cardCornerRadius="20dp">
+        android:layout_margin="6dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp">
 
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:id="@+id/gridImage"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/gridImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"/>
+
+          <CheckBox
+              android:layout_width="16dp"
+              android:layout_height="16dp"
+              android:layout_marginTop="10dp"
+              android:layout_gravity="end"
+              android:button="@drawable/selecter_check"
+              android:layout_marginRight="10dp"
+
+              />
+
+        </FrameLayout>
+
+
+
     </androidx.cardview.widget.CardView>
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Product_Name"
+            android:text="Product_Name"
+            android:textSize="16sp"
+            android:layout_gravity="start"
+            android:layout_marginStart="12dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_marginTop="4dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Product_Name"
-        android:text="Product_Name"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:layout_marginTop="8dp"/>
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/discount_price"
-        android:text="Rs.5,0000"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:layout_marginTop="8dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/discount_price"
+            android:text="Rs.5,000"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_marginStart="12dp"
+            android:layout_gravity="start"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/original_price"
-        android:foreground="@drawable/strikethrough"
-        android:text="10,000"
-        android:paddingRight="2dp"
-        android:textColor="@color/grey"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:layout_marginTop="8dp"/>
+            android:layout_marginTop="2dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/original_price"
+            android:foreground="@drawable/strikethrough"
+            android:text="10,000"
+            android:paddingRight="2dp"
+            android:textColor="@color/grey"
+            android:textSize="14sp"
+            android:layout_marginLeft="4dp"
+            android:gravity="center"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
 
 
 </LinearLayout>
+
+
+

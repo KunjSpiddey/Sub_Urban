@@ -26,17 +26,17 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return dataList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return dataList.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
 
     @Override
@@ -57,8 +57,8 @@ public class MyAdapter extends BaseAdapter {
 
         Glide.with(context).load(dataList.get(i).getImage_uri()).into(gridImage);
         ProductName.setText(dataList.get(i).getProductName());
-        Original_price.setText(dataList.get(i).getProductOriginalPrice());
-        Discount_price.setText(dataList.get(i).getProductDiscountPrice());
+        Original_price.setText("₹"+dataList.get(i).getProductOriginalPrice());
+        Discount_price.setText("₹"+dataList.get(i).getProductDiscountPrice());
 
         return view;
     }

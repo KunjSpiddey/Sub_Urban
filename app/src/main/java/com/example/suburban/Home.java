@@ -2,16 +2,10 @@ package com.example.suburban;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-//import android.media.Image;
-//import android.view.View;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,15 +14,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 public class Home extends AppCompatActivity{
 //    ViewPager viewPager;
@@ -45,11 +33,14 @@ public class Home extends AppCompatActivity{
     NavigationView navigationView;
     Toolbar toolbar;
 
+    ImageView addToCart , addFavorite;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        addFavorite = findViewById(R.id.addFavorite);
+        addToCart = findViewById(R.id.addToCart);
         drawerLayout = findViewById(R.id.my_drawer_layout);
         navigationView = findViewById(R.id.navigationView);
         View headerView = navigationView.getHeaderView(0);
@@ -59,6 +50,19 @@ public class Home extends AppCompatActivity{
         FirebaseAuth firebaseAuth;
         firebaseAuth = FirebaseAuth.getInstance();
 
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragmentLoader(new Cart_Fragment(), 1);
+            }
+        });
+
+        addFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragmentLoader(new Wishlist_Fragment(), 1);
+            }
+        });
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this,drawerLayout,toolbar,R.string.navigation_drawer_open , R.string.navigation_drawer_close
@@ -74,6 +78,9 @@ public class Home extends AppCompatActivity{
                 drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
+
+
+
         fragmentLoader(new FragHome(), 0);
         navigationView.setNavigationItemSelectedListener(item -> {
 

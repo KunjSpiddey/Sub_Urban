@@ -24,19 +24,15 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 public class FSeller_ProductDetails extends Fragment {
 
@@ -175,51 +171,66 @@ public class FSeller_ProductDetails extends Fragment {
         productTitle = pname.getText().toString().trim();
         productDescription = desc.getText().toString().trim();
         productQuantity = quantity.getText().toString().trim();
-        productOriginalPrice = original_price.getText().toString().trim(); // aa main proce che product ni
+        productOriginalPrice = original_price.getText().toString().trim();
         productDeliveryCharge = d_charge.getText().toString().trim();
         productSize = size.getText().toString().trim();
-        productDiscountPrice = discount_price.getText().toString().trim(); // ane a discount price che product ni --------> apde a price batavani che
-        productCategory = category.getSelectedItem().toString().trim();
-        productType = p_type.getSelectedItem().toString().trim();
-        Image_uri = uri.toString();
+        productDiscountPrice = discount_price.getText().toString().trim();
+        productCategory = category.getSelectedItem().toString();
+        productType = p_type.getSelectedItem().toString();
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-        final StorageReference imageReference = storageReference.child("Images/" + System.currentTimeMillis() + "." + getFileExtension(uri));
+        if (productTitle.isEmpty() || productDescription.isEmpty() || productQuantity.isEmpty() || productOriginalPrice.isEmpty() || productDeliveryCharge.isEmpty() || productSize.isEmpty() || productDiscountPrice.isEmpty()) {
+            Toast.makeText(getContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        imageReference.putFile(uri).addOnSuccessListener(taskSnapshot -> imageReference.getDownloadUrl().addOnSuccessListener(uri1 -> {
+        progressDialog.setMessage("Adding product...");
+        progressDialog.show();
 
-            addedProducts prod = new addedProducts(productDescription , productQuantity , productOriginalPrice , productDeliveryCharge , productSize , productDiscountPrice , productCategory, productType ,Image_uri );
-            addedProducts images = new addedProducts(Image_uri);
-            addedProducts abc = new addedProducts(productTitle);
-            FirebaseDatabase db = FirebaseDatabase.getInstance();
-            DatabaseReference node = db.getReference(p_type.getSelectedItem().toString());
-            node.child(productTitle).setValue(prod);
-            pname.setText("");
-            desc.setText("");
-            discount_price.setText("");
-            size.setText("");
-            quantity.setText("");
-            d_charge.setText("");
-            original_price.setText("");
-            img.setImageResource(R.drawable.subbb);
-            Toast.makeText(getContext(), "Product Added", Toast.LENGTH_SHORT).show();
-            progressBar.setVisibility(View.INVISIBLE);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference("product_images");
+        final StorageReference fileReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
+        fileReference.putFile(uri)
+                .addOnSuccessListener(taskSnapshot -> {
+                    fileReference.getDownloadUrl().addOnSuccessListener(uri1 -> {
+                        Image_uri = uri1.toString();
 
-        })).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(getContext(), e+"Failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+                        addedProducts product = new addedProducts(Image_uri, productTitle, productDescription, productQuantity, productOriginalPrice, productDeliveryCharge, productSize, productDiscountPrice, productCategory, productType);
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("products");
+                        databaseReference.push().setValue(product)
+                                .addOnSuccessListener(aVoid -> {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getContext(), "Product added successfully", Toast.LENGTH_SHORT).show();
+                                    clearFields();
+                                })
+                                .addOnFailureListener(e -> {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getContext(), "Error adding product", Toast.LENGTH_SHORT).show();
+                                });
+                    });
+                })
+                .addOnFailureListener(e -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(getContext(), "Error uploading image", Toast.LENGTH_SHORT).show();
+                })
+                .addOnProgressListener(taskSnapshot -> {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage("Uploading image: " + (int) progress + "%");
+                });
 
     }
+
+    private void clearFields() {
+        pname.setText("");
+        desc.setText("");
+        quantity.setText("");
+        original_price.setText("");
+        d_charge.setText("");
+        size.setText("");
+        discount_price.setText("");
+        category.setSelection(0);
+        p_type.setSelection(0);
+        img.setImageResource(R.drawable.seller);
+    }
+
 
 
     private void fl(Fragment fragment, int flag){
