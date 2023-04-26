@@ -193,9 +193,10 @@ public class FSeller_ProductDetails extends Fragment {
                     fileReference.getDownloadUrl().addOnSuccessListener(uri1 -> {
                         Image_uri = uri1.toString();
 
-                        addedProducts product = new addedProducts(Image_uri, productTitle, productDescription, productQuantity, productOriginalPrice, productDeliveryCharge, productSize, productDiscountPrice, productCategory, productType);
                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("products");
-                        databaseReference.push().setValue(product)
+                        String Id = databaseReference.push().getKey();
+                        addedProducts product = new addedProducts(Id, Image_uri, productTitle, productDescription, productQuantity, productOriginalPrice, productDeliveryCharge, productSize, productDiscountPrice, productCategory, productType);
+                        databaseReference.child(Id).setValue(product)
                                 .addOnSuccessListener(aVoid -> {
                                     progressDialog.dismiss();
                                     Toast.makeText(getContext(), "Product added successfully", Toast.LENGTH_SHORT).show();

@@ -18,6 +18,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Fragment_goggles extends Fragment {
@@ -42,18 +43,31 @@ public class Fragment_goggles extends Fragment {
         View view = inflater.inflate(R.layout.fragment_goggles,container,false);
 
          gridView = view.findViewById(R.id.grid_view);
-         adapter = new MyAdapter(getContext(),dataList);
+        List<Fav_item> fav_items = new ArrayList<>();
+         adapter = new MyAdapter(getContext(),dataList,fav_items);
          gridView.setAdapter(adapter);
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dataList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     addedProducts add = dataSnapshot.getValue(addedProducts.class);
                     dataList.add(add);
 
                 }
 
+                List<Fav_item> favItems = new ArrayList<>();
+                for (addedProducts products : dataList){
+                    Fav_item favItem = new Fav_item(
+                            products.getId(),
+                            products.getProductName(),
+                            products.getImage_uri(),
+                            products.getProductOriginalPrice(),
+                            products.getProductDiscountPrice());
+                    fav_items.add(favItem);
+                    adapter.setFavItems(favItems);
+                }
                 adapter.notifyDataSetChanged();
             }
 
