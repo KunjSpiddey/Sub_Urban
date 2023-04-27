@@ -7,6 +7,7 @@ public class WishListItem {
     String img;
     String oprice;
     String dprice;
+    String checked;
 
     public WishListItem(String id, String name, String img, String oprice, String dprice) {
         this.id = id;
@@ -14,6 +15,20 @@ public class WishListItem {
         this.img = img;
         this.oprice = oprice;
         this.dprice = dprice;
+        this.checked = checked;
+
+    }
+
+    public WishListItem(String id) {
+        this.id = id;
+    }
+
+    public String getChecked() {
+        return checked;
+    }
+
+    public void setChecked(String checked) {
+        this.checked = checked;
     }
 
     public String getId() {

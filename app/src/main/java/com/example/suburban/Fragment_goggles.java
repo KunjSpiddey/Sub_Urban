@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,25 +26,29 @@ public class Fragment_goggles extends Fragment {
 
     }
 
-
     private MyAdapter adapter;
     private GridView gridView;
 
-    private ImageView wishlist;
     private ArrayList<addedProducts> dataList = new ArrayList<>();
+    private List<WishListItem> wishListItems = new ArrayList<>(); // initialize wishListItems
 
     final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("products");
 
     Query query = databaseReference.orderByChild("productType").equalTo("Goggles");
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_goggles,container,false);
 
-         gridView = view.findViewById(R.id.grid_view);
+        gridView = view.findViewById(R.id.grid_view);
+
         List<Fav_item> fav_items = new ArrayList<>();
-         adapter = new MyAdapter(getContext(),dataList,fav_items);
-         gridView.setAdapter(adapter);
+
+        adapter = new MyAdapter(getContext(),dataList,fav_items);
+        gridView.setAdapter(adapter);
+
+
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -58,6 +61,7 @@ public class Fragment_goggles extends Fragment {
                 }
 
                 List<Fav_item> favItems = new ArrayList<>();
+
                 for (addedProducts products : dataList){
                     Fav_item favItem = new Fav_item(
                             products.getId(),
@@ -68,6 +72,7 @@ public class Fragment_goggles extends Fragment {
                     fav_items.add(favItem);
                     adapter.setFavItems(favItems);
                 }
+
                 adapter.notifyDataSetChanged();
             }
 
@@ -77,12 +82,6 @@ public class Fragment_goggles extends Fragment {
             }
         });
 
-
-
-
         return view;
-
     }
-
-
 }

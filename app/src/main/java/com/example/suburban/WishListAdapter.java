@@ -1,6 +1,7 @@
 package com.example.suburban;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,19 @@ public class WishListAdapter extends BaseAdapter {
     WislhListDataBase db;
     LayoutInflater layoutInflater;
     private List<WishListItem> wishListItems;
+    private boolean[] checkedStates; // add a boolean array to store the checkbox states
+
     public WishListAdapter(Context context, List<WishListItem> wishListItems) {
         this.context = context;
         this.wishListItems = wishListItems;
         db = new WislhListDataBase(context);
+        layoutInflater = LayoutInflater.from(context);
+        checkedStates = new boolean[wishListItems.size()];
+        SharedPreferences prefs = context.getSharedPreferences("checkbox_prefs", Context.MODE_PRIVATE);
+        for (int i = 0; i < wishListItems.size(); i++) {
+            boolean isChecked = prefs.getBoolean("checkbox_" + wishListItems.get(i).getId(), false);
+            checkedStates[i] = isChecked;
+        }
     }
 
 
@@ -39,59 +49,58 @@ public class WishListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return Long.parseLong(wishListItems.get(i).getId());
     }
+
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
-        View view = convertView;
-        if (layoutInflater == null){
-            layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-        if (view == null){
-            view = layoutInflater.inflate(R.layout.wishlist_item_layout, null);
-        }
-
-        ImageButton delete = view.findViewById(R.id.fav_delete);
-
-        final WishListItem wishListItem = wishListItems.get(i);
-        ImageView pimg = view.findViewById(R.id.fav_img);
-
-        TextView itemName = view.findViewById(R.id.fav_pname);
-        if (itemName != null) {
-            itemName.setText(wishListItem.getName());
+        ViewHolder holder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.wishlist_item_layout, viewGroup, false);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        TextView oprice = view.findViewById(R.id.fav_o_price);
-        if (oprice != null) {
-            oprice.setText(wishListItem.getOprice());
-        }
-        TextView dprice = view.findViewById(R.id.fav_d_price);
-        if (dprice != null) {
-            dprice.setText(wishListItem.getDprice());
-        }
-        if (pimg != null) {
+        WishListItem wishListItem = wishListItems.get(i);
+        holder.itemName.setText(wishListItem.getName());
+        holder.oprice.setText(wishListItem.getOprice());
+        holder.dprice.setText(wishListItem.getDprice());
+        Glide.with(context).load(wishListItem.getImg()).into(holder.pimg);
 
-            Glide.with(context).load(wishListItems.get(i).getImg()).into(pimg);
-        }
-        delete.setTag(i);
-        int position = (Integer) delete.getTag();
-        WishListItem item = wishListItems.get(position);
-        delete.getTag();
-        delete.setOnClickListener(new View.OnClickListener() {
+        holder.delete.setTag(wishListItem);
+        holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.deleteData(item.getId());
-                wishListItems.remove(item); // remove the deleted item from the list
-                notifyDataSetChanged(); // update the adapter with the updated list
+                SharedPreferences prefs = context.getSharedPreferences("checkbox_prefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean("checkbox_" + wishListItem.getId(), false);
+                editor.apply();
+                db.deleteData(wishListItem.getId());
+                wishListItems.remove(wishListItem);
+                notifyDataSetChanged();
             }
         });
 
-
-
-//        Glide.with(context).load(dataList.get(i).getImage_uri()).into(holder.item_image);
-
-
-        return view;
+        return convertView;
     }
+
+    static class ViewHolder {
+        ImageView pimg;
+        TextView itemName;
+        TextView oprice;
+        TextView dprice;
+        ImageButton delete;
+
+        ViewHolder(View view) {
+            pimg = view.findViewById(R.id.fav_img);
+            itemName = view.findViewById(R.id.fav_pname);
+            oprice = view.findViewById(R.id.fav_o_price);
+            dprice = view.findViewById(R.id.fav_d_price);
+            delete = view.findViewById(R.id.fav_delete);
+        }
+    }
+
 }

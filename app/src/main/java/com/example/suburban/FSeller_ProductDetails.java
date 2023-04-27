@@ -214,7 +214,7 @@ public class FSeller_ProductDetails extends Fragment {
                 })
                 .addOnProgressListener(taskSnapshot -> {
                     double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                    progressDialog.setMessage("Uploading image: " + (int) progress + "%");
+                    progressDialog.setMessage("Uploading Details: " + (int) progress + "%");
                 });
 
     }

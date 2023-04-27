@@ -7,7 +7,7 @@ public class Fav_item {
     String oprice;
     String dprice;
 
-    boolean state;
+
 
     public Fav_item(String id, String name, String image_uri, String oprice, String dprice) {
         this.id = id;
@@ -15,15 +15,9 @@ public class Fav_item {
         this.image_uri = image_uri;
         this.oprice = oprice;
         this.dprice = dprice;
+
     }
 
-    public boolean isState() {
-        return state;
-    }
-
-    public void setState(boolean state) {
-        this.state = state;
-    }
 
     public Fav_item() {
     }

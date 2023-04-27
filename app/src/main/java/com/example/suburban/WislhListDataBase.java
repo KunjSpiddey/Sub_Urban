@@ -22,6 +22,7 @@ public class WislhListDataBase extends SQLiteOpenHelper {
     public static final String COL_OPRICE = "oprice";
     public static final String COL_DPRICE = "dprice";
     public static final String COL_IMG = "image";
+    public static final String COL_CHECK = "checked";
 
 
     public WislhListDataBase(Context context) {
@@ -35,12 +36,11 @@ public class WislhListDataBase extends SQLiteOpenHelper {
                 + COL_NAME + " TEXT,"
                 + COL_OPRICE + " TEXT,"
                 + COL_DPRICE + " TEXT,"
+                + COL_CHECK + " INTEGER DEFAULT 0,"
                 + COL_IMG + " TEXT"
                 + ")";
         sqLiteDatabase.execSQL(CREATE_TABLE);
     }
-
-
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
@@ -49,14 +49,14 @@ public class WislhListDataBase extends SQLiteOpenHelper {
 
 
 
-    public void insertData (String id , String name , String oprice , String dprice , String image){
+    public void insertData (WishListItem item){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_ID,id);
-        contentValues.put(COL_NAME,name);
-        contentValues.put(COL_OPRICE,oprice);
-        contentValues.put(COL_DPRICE,dprice);
-        contentValues.put(COL_IMG,image);
+        contentValues.put(COL_ID,item.getId());
+        contentValues.put(COL_NAME,item.getName());
+        contentValues.put(COL_OPRICE,item.getOprice());
+        contentValues.put(COL_DPRICE,item.getDprice());
+        contentValues.put(COL_IMG,item.getImg());
         db.insert("Wishlist" , null , contentValues);
         db.close();
     }
@@ -72,6 +72,7 @@ public class WislhListDataBase extends SQLiteOpenHelper {
                COL_OPRICE,
                COL_DPRICE,
                COL_IMG,
+                COL_CHECK
 
         };
 
@@ -92,6 +93,7 @@ public class WislhListDataBase extends SQLiteOpenHelper {
                 String itemImg = cursor.getString(cursor.getColumnIndexOrThrow(COL_IMG));
                 String itemOprice= cursor.getString(cursor.getColumnIndexOrThrow(COL_OPRICE));
                 String itemDprice = cursor.getString(cursor.getColumnIndexOrThrow(COL_DPRICE));
+                String itemChecked = cursor.getString(cursor.getColumnIndexOrThrow(COL_CHECK));
                 WishListItem wishListItem = new WishListItem(itemId , itemName , itemImg , itemOprice , itemDprice);
                 fav_items.add(wishListItem);
             } while (cursor.moveToNext());
@@ -106,6 +108,38 @@ public class WislhListDataBase extends SQLiteOpenHelper {
         String sql = "DELETE FROM " + TABLE_NAME + " WHERE " + COL_ID + " = '" + id + "'";
         db.execSQL(sql);
     }
+
+
+    public void changeStatus1(String id){
+        SQLiteDatabase db = getWritableDatabase();
+        String updateQuery = "UPDATE " + TABLE_NAME + " SET " + COL_CHECK + " = '1' WHERE " + COL_ID + " = '" + id + "'";
+        db.execSQL(updateQuery);
+    }
+
+    public void changeStatus0(String id){
+        SQLiteDatabase db = getWritableDatabase();
+        String updateQuery = "UPDATE " + TABLE_NAME + " SET " + COL_CHECK + " = '0' WHERE " + COL_ID + " = '" + id + "'";
+        db.execSQL(updateQuery);
+    }
+
+    public void status(String id){
+        SQLiteDatabase db = getReadableDatabase();
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_CHECK + " = '1' ";
+        db.execSQL(sql);
+    }
+
+    public String getCheckStatus(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COL_CHECK + " FROM " + TABLE_NAME + " WHERE " + COL_ID + " = '" + id + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        String checkStatus = "0";
+        if (cursor.moveToFirst()) {
+            checkStatus = cursor.getString(cursor.getColumnIndexOrThrow(COL_CHECK));
+        }
+        cursor.close();
+        return checkStatus;
+    }
+
 
 
 }
