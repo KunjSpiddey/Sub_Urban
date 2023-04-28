@@ -189,12 +189,12 @@
 
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/baseline_image_24"
                 android:id="@+id/uploadImage"
+                android:layout_width="match_parent"
+                android:layout_height="284dp"
                 android:layout_marginTop="20dp"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_image_24" />
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -216,6 +216,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:textSize="24sp" />
 
@@ -227,11 +229,20 @@
                 android:text="Product Category"
                 android:textSize="18dp" />
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                app:cardCornerRadius="5dp"
+                app:cardPreventCornerOverlap="false"
+                android:layout_marginLeft="12dp"
+                android:backgroundTint="@color/light_grey"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="10dp">
             <Spinner
                 android:id="@+id/category"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
 
 
             <TextView
@@ -241,11 +252,20 @@
                 android:text="Product Type"
                 android:textSize="18dp" />
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                app:cardCornerRadius="5dp"
+                app:cardPreventCornerOverlap="false"
+                android:layout_marginLeft="12dp"
+                android:backgroundTint="@color/light_grey"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="10dp">
             <Spinner
                 android:id="@+id/p_type"
-                android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -261,6 +281,8 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/border"
                 android:maxLines="10"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:textSize="24sp" />
 
             <TextView
@@ -275,6 +297,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:inputType="number"
                 android:textSize="24sp" />
@@ -291,12 +315,11 @@
                 android:id="@+id/discount_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="10dp"  android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:inputType="number"
                 android:textSize="24sp" />
-
-
 
 
             <TextView
@@ -311,6 +334,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:inputType="number"
                 android:textSize="24sp" />
@@ -328,6 +353,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/border"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:inputType="number"
                 android:textSize="24sp" />
 
@@ -344,6 +371,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:inputType="number"
                 android:textSize="24sp" />

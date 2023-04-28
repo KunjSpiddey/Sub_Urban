@@ -107,6 +107,17 @@
                     android:textColor="#0D1B62"
                     android:textSize="016dp"
                     android:textStyle="normal|italic" />
+                <TextView
+                    android:id="@+id/forgotpass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:paddingTop="10dp"
+                    android:gravity="end"
+                    android:text="Forgot Password? "
+                    android:textColor="#0D1B62"
+                    android:textSize="016dp"
+                    android:textStyle="normal|italic" />
             </com.google.android.material.textfield.TextInputLayout>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>

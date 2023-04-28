@@ -1,7 +1,5 @@
 package com.example.suburban;
 
-import static androidx.transition.R.layout.support_simple_spinner_dropdown_item;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -34,10 +32,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+
 public class FSeller_ProductDetails extends Fragment {
 
     private String Selected_Category;
     ArrayAdapter<CharSequence> Adapter_Product_type;
+
     private ProgressDialog progressDialog;
     private Uri imageUri;
 
@@ -55,6 +56,7 @@ public class FSeller_ProductDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Adapter_Product_type = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, new ArrayList<>());
 
      View view = inflater.inflate(R.layout.fragment_f_seller__product_details, container, false);
     img = view.findViewById(R.id.uploadImage);
@@ -72,8 +74,6 @@ public class FSeller_ProductDetails extends Fragment {
      progressDialog = new ProgressDialog(getContext());
      progressDialog.setTitle("Please Wait");
      progressDialog.setCanceledOnTouchOutside(false);
-
-
 
 
 
@@ -105,12 +105,11 @@ public class FSeller_ProductDetails extends Fragment {
 
 
 
-
         String [] Spinner_category = getResources().getStringArray(R.array.catagories);
         String [] Spinner_Cloths = getResources().getStringArray(R.array.product_type_clothes);
         String [] Spinner_Accessories = getResources().getStringArray(R.array.product_type_accessories);
 
-        ArrayAdapter<CharSequence> Adapter_Category = new ArrayAdapter(getContext(), support_simple_spinner_dropdown_item,Spinner_category);
+        ArrayAdapter<CharSequence> Adapter_Category = new ArrayAdapter(getContext(), androidx.transition.R.layout.support_simple_spinner_dropdown_item,Spinner_category);
         category.setAdapter(Adapter_Category);
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -119,17 +118,22 @@ public class FSeller_ProductDetails extends Fragment {
                 int parentid = adapterView.getId();
                 if (parentid == R.id.category){
                     switch(Selected_Category){
-                        case "Cloths" :
-                            Adapter_Product_type = new ArrayAdapter<>(adapterView.getContext(), com.tbuonomo.viewpagerdotsindicator.R.layout.support_simple_spinner_dropdown_item,Spinner_Cloths);
+                        case "Clothes":
+                            Adapter_Product_type.clear();
+                            Adapter_Product_type.addAll(Spinner_Cloths);
+                            p_type.setAdapter(Adapter_Product_type);
                             break;
                         case "Accessories":
-                            Adapter_Product_type = new ArrayAdapter<>(adapterView.getContext(),com.tbuonomo.viewpagerdotsindicator.R.layout.support_simple_spinner_dropdown_item,Spinner_Accessories);
+                            Adapter_Product_type.clear();
+                            Adapter_Product_type.addAll(Spinner_Accessories);
+                            p_type.setAdapter(Adapter_Product_type);
                             break;
+
                         default:break;
                     }
 
 //                    Adapter_Product_type.setDropDownViewResource(support_simple_spinner_dropdown_item);
-//                   Adapter_Product_type.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                   Adapter_Product_type.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
                    p_type.setAdapter(Adapter_Product_type);///////
                 }
             }

@@ -18,6 +18,7 @@ public class WishListAdapter extends BaseAdapter {
 
     private Context context;
     WislhListDataBase db;
+    MyAdapter adapter = new MyAdapter();
     LayoutInflater layoutInflater;
     private List<WishListItem> wishListItems;
     private boolean[] checkedStates; // add a boolean array to store the checkbox states
@@ -78,6 +79,7 @@ public class WishListAdapter extends BaseAdapter {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putBoolean("checkbox_" + wishListItem.getId(), false);
                 editor.apply();
+                adapter.sting(wishListItem.getId());
                 db.deleteData(wishListItem.getId());
                 wishListItems.remove(wishListItem);
                 notifyDataSetChanged();

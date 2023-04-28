@@ -1,9 +1,5 @@
 package com.example.suburban;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.suburban.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,7 +28,7 @@ public class Login_Activity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private  String email= "",password = "";
     private FirebaseAuth firebaseAuth;
-    TextView Create;
+    TextView Create,fp;
     Button Login;
     //    @SuppressLint("MissingInflatedId")
     @Override
@@ -37,6 +37,7 @@ public class Login_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         binding= ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        fp=findViewById(R.id.forgotpass);
 
 //        actionBar= getSupportActionBar();
 //        actionBar.setTitle("Login");
@@ -62,8 +63,16 @@ public class Login_Activity extends AppCompatActivity {
             }
 
         });
+        fp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Login_Activity.this,forgotpassword.class);
+                startActivity(i);
+            }
+        });
 
     }
+
     public void checkuser(){
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser!=null){
@@ -136,6 +145,3 @@ public class Login_Activity extends AppCompatActivity {
 //            startActivity(intent);
 ////           finish();
 //        });
-
-
-

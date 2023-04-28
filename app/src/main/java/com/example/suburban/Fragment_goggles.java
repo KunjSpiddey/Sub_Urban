@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -39,22 +41,32 @@ public class Fragment_goggles extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_goggles,container,false);
+        View view = inflater.inflate(R.layout.fragment_goggles, container, false);
 
         gridView = view.findViewById(R.id.grid_view);
 
         List<Fav_item> fav_items = new ArrayList<>();
 
-        adapter = new MyAdapter(getContext(),dataList,fav_items);
+        adapter = new MyAdapter(getContext(), dataList, fav_items);
         gridView.setAdapter(adapter);
 
+        gridView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getContext(), "hello"+i, Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dataList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     addedProducts add = dataSnapshot.getValue(addedProducts.class);
                     dataList.add(add);
 
@@ -62,7 +74,7 @@ public class Fragment_goggles extends Fragment {
 
                 List<Fav_item> favItems = new ArrayList<>();
 
-                for (addedProducts products : dataList){
+                for (addedProducts products : dataList) {
                     Fav_item favItem = new Fav_item(
                             products.getId(),
                             products.getProductName(),

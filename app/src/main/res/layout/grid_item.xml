@@ -12,6 +12,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:layout_margin="6dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp">
@@ -24,6 +26,8 @@
                 android:id="@+id/gridImage"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"/>
 

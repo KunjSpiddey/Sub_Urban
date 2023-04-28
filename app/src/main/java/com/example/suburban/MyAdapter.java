@@ -24,8 +24,15 @@ public class MyAdapter extends BaseAdapter {
     private Context context;
     private String id;
 
+    public MyAdapter() {
+    }
+
     public MyAdapter(String id) {
         this.id = id;
+    }
+    public String sting (String id){
+        this.id = id;
+        return id;
     }
 
     LayoutInflater layoutInflater;
@@ -59,6 +66,10 @@ public class MyAdapter extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
+
+
+
+
     public void setFavItems(List<Fav_item> favItems) {
         this.fav_items = favItems;
     }
@@ -66,6 +77,7 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
+
 
         if (layoutInflater == null){
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -96,6 +108,7 @@ public class MyAdapter extends BaseAdapter {
 
         holder.fav.setChecked(isChecked);
 
+
         holder.fav.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -108,8 +121,8 @@ public class MyAdapter extends BaseAdapter {
                         product.getProductDiscountPrice(), product.getImage_uri());
                 if (b) {
                     db.insertData(item);
-                } else {
 
+                } else {
                     holder.fav.setChecked(false);
                     db.deleteData(item.getId());
 
@@ -139,6 +152,7 @@ public class MyAdapter extends BaseAdapter {
 
 
     private static class ViewHolder {
+        View itemView;
         ImageView item_image;
         TextView item_name, o_price, d_price;
         CheckBox fav;
