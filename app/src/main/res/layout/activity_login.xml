@@ -7,20 +7,6 @@
     tools:context=".Login_Activity">
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/aladin"
-        android:text="Login"
-        android:layout_marginTop="35dp"
-        android:textColor="#000000"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.301" />
 
 
     <ImageView
@@ -38,21 +24,22 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/sub" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/login_button"
-        android:layout_width="102dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/liok"
-        android:backgroundTint="@color/Dark_grey"
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/aladin"
         android:text="Login"
-        android:textColor="@color/white"
+        android:textColor="#000000"
+        android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.277" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -122,5 +109,19 @@
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_button"
+        android:layout_width="102dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/liok"
+        android:backgroundTint="@color/Dark_grey"
+        android:text="Login"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
