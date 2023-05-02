@@ -1,5 +1,7 @@
 package com.example.suburban;
 
+import static com.example.suburban.R.array.catagories;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -44,9 +46,14 @@ public class FSeller_ProductDetails extends Fragment {
 
     ProgressBar progressBar;
     ImageView img;
-    EditText pname , desc , discount_price , size , quantity , d_charge , original_price;
-    Spinner category , p_type;
+    EditText pname , desc , discount_price , size , quantity , d_charge , original_price , brand , color , contains;
+    Spinner category , p_type , Return;
     AppCompatButton add_product;
+
+    String rt [] = {
+            "Available",
+            "Not-Available"
+    };
 
     public FSeller_ProductDetails() {
 
@@ -59,11 +66,15 @@ public class FSeller_ProductDetails extends Fragment {
         Adapter_Product_type = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, new ArrayList<>());
 
      View view = inflater.inflate(R.layout.fragment_f_seller__product_details, container, false);
+     color = view.findViewById(R.id.color);
+     contains = view.findViewById(R.id.contains);
+     Return = view.findViewById(R.id.Return);
     img = view.findViewById(R.id.uploadImage);
     pname = view.findViewById(R.id.seller_pname);
      desc = view.findViewById(R.id.description);
      progressBar = view.findViewById(R.id.progressBar);
      size= view.findViewById(R.id.size);
+     brand = view.findViewById(R.id.brand);
      discount_price = view.findViewById(R.id.discount_price);
      original_price = view.findViewById(R.id.original_price);
      quantity = view.findViewById(R.id.quantity);
@@ -105,10 +116,11 @@ public class FSeller_ProductDetails extends Fragment {
 
 
 
-        String [] Spinner_category = getResources().getStringArray(R.array.catagories);
+        String [] Spinner_category = getResources().getStringArray(catagories);
         String [] Spinner_Cloths = getResources().getStringArray(R.array.product_type_clothes);
         String [] Spinner_Accessories = getResources().getStringArray(R.array.product_type_accessories);
-
+        ArrayAdapter<CharSequence> ret = new ArrayAdapter<>(getContext() , com.tbuonomo.viewpagerdotsindicator.R.layout.support_simple_spinner_dropdown_item,rt);
+        Return.setAdapter(ret);
         ArrayAdapter<CharSequence> Adapter_Category = new ArrayAdapter(getContext(), androidx.transition.R.layout.support_simple_spinner_dropdown_item,Spinner_category);
         category.setAdapter(Adapter_Category);
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -156,7 +168,6 @@ public class FSeller_ProductDetails extends Fragment {
         }
     });
 
-
         return view;
     }
 
@@ -168,8 +179,8 @@ public class FSeller_ProductDetails extends Fragment {
         return mime.getExtensionFromMimeType(contentResolver.getType(fileUri));
     }
 
-    private String Image_uri ,productTitle , productDescription , productQuantity , productOriginalPrice , productDeliveryCharge , productSize , productDiscountPrice , productCategory, productType ;
-
+    private String productBrand, Image_uri ,productTitle , productDescription , productQuantity , productOriginalPrice , productDeliveryCharge , productSize , productDiscountPrice , productCategory, productType ;
+    private String productcolor , productReturn , productcontains;
     private void ADDPRODUCT(Uri uri) {
 
         productTitle = pname.getText().toString().trim();
@@ -181,8 +192,17 @@ public class FSeller_ProductDetails extends Fragment {
         productDiscountPrice = discount_price.getText().toString().trim();
         productCategory = category.getSelectedItem().toString();
         productType = p_type.getSelectedItem().toString();
+        productBrand = brand.getText().toString().trim();
+        productcolor = color.getText().toString().trim();
+        productReturn = Return.getSelectedItem().toString();
+        productcontains = contains.getText().toString();
 
-        if (productTitle.isEmpty() || productDescription.isEmpty() || productQuantity.isEmpty() || productOriginalPrice.isEmpty() || productDeliveryCharge.isEmpty() || productSize.isEmpty() || productDiscountPrice.isEmpty()) {
+
+        if (productTitle.isEmpty() || productDescription.isEmpty() || productQuantity.isEmpty()
+                || productOriginalPrice.isEmpty() || productDeliveryCharge.isEmpty() ||
+                productSize.isEmpty() || productDiscountPrice.isEmpty() || productBrand.isEmpty()
+            || productcontains.isEmpty() || productcolor.isEmpty() || productCategory.isEmpty() || productType.isEmpty() || productReturn.isEmpty()
+        ) {
             Toast.makeText(getContext(), "Please fill all the fields", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -199,7 +219,7 @@ public class FSeller_ProductDetails extends Fragment {
 
                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("products");
                         String Id = databaseReference.push().getKey();
-                        addedProducts product = new addedProducts(Id, Image_uri, productTitle, productDescription, productQuantity, productOriginalPrice, productDeliveryCharge, productSize, productDiscountPrice, productCategory, productType);
+                        addedProducts product = new addedProducts(Id, Image_uri, productTitle, productDescription, productQuantity, productOriginalPrice, productDeliveryCharge, productSize, productDiscountPrice, productCategory, productType , productBrand , productcolor , productcontains , productReturn);
                         databaseReference.child(Id).setValue(product)
                                 .addOnSuccessListener(aVoid -> {
                                     progressDialog.dismiss();
@@ -233,7 +253,11 @@ public class FSeller_ProductDetails extends Fragment {
         discount_price.setText("");
         category.setSelection(0);
         p_type.setSelection(0);
+        Return.setSelection(0);
+        contains.setText("");
+        color.setText("");
         img.setImageResource(R.drawable.seller);
+        brand.setText("");
     }
 
 

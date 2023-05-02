@@ -9,7 +9,7 @@ import android.widget.GridView;
 
 import androidx.fragment.app.Fragment;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class Wishlist_Fragment extends Fragment {
@@ -30,7 +30,7 @@ public class Wishlist_Fragment extends Fragment {
 
         gridView = view.findViewById(R.id.wishlist_grid_view);
         WislhListDataBase db = new WislhListDataBase(getContext());
-        List<WishListItem> wishListItems = db.getAllItems();
+        ArrayList<WishListItem> wishListItems = (ArrayList<WishListItem>) db.getAllItems();
         WishListAdapter wishListAdapter = new WishListAdapter(getContext(),wishListItems);
         gridView.setAdapter(wishListAdapter);
 

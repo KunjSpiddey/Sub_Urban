@@ -10,10 +10,13 @@
     <GridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
-        android:layout_height="match_parent"
-        android:numColumns="2"/>
+        android:descendantFocusability="blocksDescendants"
+        android:numColumns="2"
+       />
+
 
 
 </FrameLayout>

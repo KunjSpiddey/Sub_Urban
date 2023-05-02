@@ -208,6 +208,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:text="Brand Name"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/brand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/border"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="Product Name"
                 android:textSize="18dp" />
 
@@ -219,7 +236,7 @@
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:background="@drawable/border"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
 
             <TextView
@@ -283,7 +300,7 @@
                 android:maxLines="10"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -301,7 +318,7 @@
                 android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:inputType="number"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
 
             <TextView
@@ -315,12 +332,71 @@
                 android:id="@+id/discount_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"  android:paddingTop="5dp"
+                android:layout_marginTop="10dp"
+                android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:inputType="number"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Color"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/border"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Contains per box"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/contains"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/border"
+                android:inputType="number"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Return"
+                android:textSize="18dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                app:cardCornerRadius="5dp"
+                app:cardPreventCornerOverlap="false"
+                android:layout_marginLeft="12dp"
+                android:backgroundTint="@color/light_grey"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="10dp">
+            <Spinner
+                android:id="@+id/Return"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -338,7 +414,7 @@
                 android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:inputType="number"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -356,7 +432,7 @@
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:inputType="number"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
 
             <TextView

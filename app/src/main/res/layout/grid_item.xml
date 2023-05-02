@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,7 +6,6 @@
     android:layout_height="wrap_content"
     android:padding="16dp"
     android:gravity="center">
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
@@ -19,6 +17,7 @@
         app:cardElevation="10dp">
 
         <FrameLayout
+            android:focusable="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -27,44 +26,40 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:focusable="false"
-                android:focusableInTouchMode="false"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"/>
 
-          <CheckBox
-              android:id="@+id/fav_check"
-              android:layout_width="16dp"
-              android:layout_height="16dp"
-              android:layout_marginTop="10dp"
-              android:layout_gravity="end"
-              android:button="@drawable/selecter_check"
-              android:layout_marginRight="10dp"
-
-              />
+            <CheckBox
+                android:id="@+id/fav_check"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="end"
+                android:focusable="false"
+                android:button="@drawable/selecter_check"
+                android:layout_marginRight="10dp" />
 
         </FrameLayout>
 
-
-
     </androidx.cardview.widget.CardView>
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Product_Name"
-            android:text="Product_Name"
-            android:textSize="16sp"
-            android:layout_gravity="start"
-            android:layout_marginStart="12dp"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:layout_marginTop="4dp"/>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Product_Name"
+        android:text="Product_Name"
+        android:textSize="16sp"
+        android:focusable="false"
+        android:layout_gravity="start"
+        android:layout_marginStart="12dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_marginTop="4dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="false"
         android:orientation="horizontal">
 
         <TextView
@@ -72,12 +67,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/discount_price"
             android:text="Rs.5,000"
+            android:focusable="false"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:gravity="center"
             android:layout_marginStart="12dp"
             android:layout_gravity="start"
-
             android:layout_marginTop="2dp"/>
 
         <TextView
@@ -86,16 +81,13 @@
             android:id="@+id/original_price"
             android:foreground="@drawable/strikethrough"
             android:text="10,000"
+            android:focusable="false"
             android:paddingRight="2dp"
             android:textColor="@color/grey"
             android:textSize="14sp"
             android:layout_marginLeft="4dp"
             android:gravity="center"
             android:layout_marginTop="2dp"/>
+
     </LinearLayout>
-
-
 </LinearLayout>
-
-
-

@@ -5,6 +5,7 @@ public class addedProducts {
 
     String productTitle;
     String Id;
+    String brand;
     String productDescription;
     String productQuantity;
     String productOriginalPrice;
@@ -14,12 +15,22 @@ public class addedProducts {
     String productCategory;
     String productType ;
     String Image_uri;
-
     String productName;
+    String color;
+   Double Shoulder;
+   Double Chest;
 
-    public addedProducts(String Id ,String Image_uri, String productName, String productDescription, String productQuantity, String productOriginalPrice, String productDeliveryCharge, String productSize, String productDiscountPrice, String productCategory, String productType) {
+   String Fabric;
+   String Contains;
+   String Return;
 
+    public addedProducts(String Id ,String Image_uri, String productName, String productDescription, String productQuantity, String productOriginalPrice, String productDeliveryCharge, String productSize, String productDiscountPrice
+            , String productCategory, String productType, String brand , String color , String contains , String Return) {
+
+        this.color = color;
+        this.Contains = contains;
         this.productName = productName;
+        this.Return = Return;
         this.Id = Id;
         this.productDescription = productDescription;
         this.productQuantity = productQuantity;
@@ -30,10 +41,44 @@ public class addedProducts {
         this.productCategory = productCategory;
         this.productType = productType;
         this.Image_uri = Image_uri;
+        this.brand = brand;
+
     }
 
     public addedProducts() {
 
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getContains() {
+        return Contains;
+    }
+
+    public void setContains(String contains) {
+        Contains = contains;
+    }
+
+    public String getReturn() {
+        return Return;
+    }
+
+    public void setReturn(String aReturn) {
+        Return = aReturn;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getId() {

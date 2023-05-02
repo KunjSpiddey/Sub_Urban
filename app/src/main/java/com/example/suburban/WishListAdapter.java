@@ -6,24 +6,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class WishListAdapter extends BaseAdapter {
 
     private Context context;
     WislhListDataBase db;
-    MyAdapter adapter = new MyAdapter();
+
     LayoutInflater layoutInflater;
-    private List<WishListItem> wishListItems;
+    private ArrayList<addedProducts> dataList;
+    private ArrayList<WishListItem> wishListItems;
     private boolean[] checkedStates; // add a boolean array to store the checkbox states
 
-    public WishListAdapter(Context context, List<WishListItem> wishListItems) {
+    public WishListAdapter(Context context, ArrayList<WishListItem> wishListItems) {
         this.context = context;
         this.wishListItems = wishListItems;
         db = new WislhListDataBase(context);
@@ -50,7 +52,13 @@ public class WishListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return Long.parseLong(wishListItems.get(i).getId());
+        try {
+            return Long.parseLong(wishListItems.get(i).getId());
+        } catch (NumberFormatException e) {
+            // Handle the error gracefully (e.g., log the error, return a default value)
+            return -1;
+        }
+
     }
 
 
@@ -66,28 +74,41 @@ public class WishListAdapter extends BaseAdapter {
         }
 
         WishListItem wishListItem = wishListItems.get(i);
+        String img = wishListItem.getImg();
+
+        Picasso.get().load(img).into(holder.pimg);
         holder.itemName.setText(wishListItem.getName());
         holder.oprice.setText(wishListItem.getOprice());
         holder.dprice.setText(wishListItem.getDprice());
-        Glide.with(context).load(wishListItem.getImg()).into(holder.pimg);
 
-        holder.delete.setTag(wishListItem);
+
+//        Bitmap bitmap = downloadBitmap(img);
+//        holder.pimg.setImageBitmap(bitmap);
+
+
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int index = wishListItems.indexOf(wishListItem);
+                if (index != -1) {
+                    checkedStates[index] = false;
+                }
                 SharedPreferences prefs = context.getSharedPreferences("checkbox_prefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putBoolean("checkbox_" + wishListItem.getId(), false);
                 editor.apply();
-                adapter.sting(wishListItem.getId());
                 db.deleteData(wishListItem.getId());
                 wishListItems.remove(wishListItem);
                 notifyDataSetChanged();
             }
         });
 
+
+
+
         return convertView;
     }
+
 
     static class ViewHolder {
         ImageView pimg;
@@ -95,6 +116,7 @@ public class WishListAdapter extends BaseAdapter {
         TextView oprice;
         TextView dprice;
         ImageButton delete;
+        CheckBox checkBox;
 
         ViewHolder(View view) {
             pimg = view.findViewById(R.id.fav_img);
@@ -102,6 +124,7 @@ public class WishListAdapter extends BaseAdapter {
             oprice = view.findViewById(R.id.fav_o_price);
             dprice = view.findViewById(R.id.fav_d_price);
             delete = view.findViewById(R.id.fav_delete);
+
         }
     }
 

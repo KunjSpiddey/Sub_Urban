@@ -22,18 +22,7 @@ public class MyAdapter extends BaseAdapter {
     private ArrayList<addedProducts> dataList;
 
     private Context context;
-    private String id;
-
-    public MyAdapter() {
-    }
-
-    public MyAdapter(String id) {
-        this.id = id;
-    }
-    public String sting (String id){
-        this.id = id;
-        return id;
-    }
+    private boolean deleteClicked;
 
     LayoutInflater layoutInflater;
     WislhListDataBase db;
@@ -50,8 +39,6 @@ public class MyAdapter extends BaseAdapter {
         this.fav_items = fav_items;
     }
 
-
-
     @Override
     public int getCount() {
         return dataList.size();
@@ -67,26 +54,23 @@ public class MyAdapter extends BaseAdapter {
         return i;
     }
 
-
-
-
-    public void setFavItems(List<Fav_item> favItems) {
-        this.fav_items = favItems;
+    public void setDeleteClicked(boolean deleteClicked) {
+        this.deleteClicked = deleteClicked;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
 
-
         if (layoutInflater == null){
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
+
         if (view == null){
             view = layoutInflater.inflate(R.layout.grid_item, null);
             holder = new ViewHolder();
             holder.item_image = view.findViewById(R.id.gridImage);
-            holder.item_name = view.findViewById(R.id.Product_Name);
+            holder.item_name = (TextView) view.findViewById(R.id.Product_Name);
             holder.o_price = view.findViewById(R.id.original_price);
             holder.d_price = view.findViewById(R.id.discount_price);
             holder.fav = view.findViewById(R.id.fav_check);
@@ -102,61 +86,43 @@ public class MyAdapter extends BaseAdapter {
         holder.o_price.setText("₹" + product.getProductOriginalPrice());
         holder.d_price.setText("₹" + product.getProductDiscountPrice());
 
-        // Retrieve the saved checkbox state from SharedPreferences
-        SharedPreferences preferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        boolean isChecked = preferences.getBoolean("checkbox_" + product.getId(), false);
-
+        boolean isChecked = false;
+        if (!deleteClicked) {
+            isChecked = sharedPreferences.getBoolean("checkbox_" + product.getId(), false);
+        }
         holder.fav.setChecked(isChecked);
-
 
         holder.fav.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                // Save the checkbox state to SharedPreferences
-                SharedPreferences.Editor editor = preferences.edit();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("checkbox_" + product.getId(), b);
                 editor.apply();
-                // Add or remove the product from the wishlist database based on checkbox state
-                WishListItem item = new WishListItem(product.getId(), product.getProductName(), product.getProductOriginalPrice(),
-                        product.getProductDiscountPrice(), product.getImage_uri());
+
+                WishListItem item = new WishListItem(product.getId(), product.getProductName(),product.getImage_uri(),product.getProductOriginalPrice(),product.getProductDiscountPrice());
                 if (b) {
                     db.insertData(item);
-
                 } else {
-                    holder.fav.setChecked(false);
                     db.deleteData(item.getId());
-
                 }
             }
         });
 
-        // Check if the delete button was clicked in the WishlistFragment
-        boolean deleteClicked = sharedPreferences.getBoolean("delete_clicked", false);
+
         if (deleteClicked) {
-            // Get the saved state of the checkbox for this product
-            boolean checkBoxState = preferences.getBoolean("checkbox_" + product.getId(), false);
-            if (checkBoxState) {
-                // If the checkbox is checked, uncheck it and save the new state
-                holder.fav.setChecked(false);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean("checkbox_" + product.getId(), false);
-                editor.apply();
-            }
+            holder.fav.setChecked(false);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("checkbox_" + product.getId(), false);
+            editor.apply();
         }
 
         return view;
     }
-
-
-
-
 
     private static class ViewHolder {
         View itemView;
         ImageView item_image;
         TextView item_name, o_price, d_price;
         CheckBox fav;
-
     }
-
 }
