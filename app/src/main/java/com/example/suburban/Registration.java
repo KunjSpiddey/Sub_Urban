@@ -1,27 +1,29 @@
 package com.example.suburban;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
-import android.content.Intent;
-import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.text.TextUtils;
-import android.util.Patterns;
-import android.widget.Button;
-import android.widget.Toast;
-
-
 import com.example.suburban.databinding.ActivityRegistrationBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Registration extends AppCompatActivity {
     private ActivityRegistrationBinding binding;
@@ -73,7 +75,7 @@ public class Registration extends AppCompatActivity {
 
         email=binding.registrationMail.getText().toString().trim();
         password= binding.registrationPassword.getText().toString().trim();
-        confirmpass = binding.confirmPassword.getText().toString().trim();
+        confirmpass = confirmpass2.getText().toString().trim();
         mobile = binding.registrationMobile.getText().toString().trim();
         //validate data
 
@@ -82,13 +84,13 @@ public class Registration extends AppCompatActivity {
             binding.invalidMail.setVisibility(View.VISIBLE);
         }
         else if(TextUtils.isEmpty(mobile)){
-                binding.invalidMobile.setVisibility(View.VISIBLE);
+            binding.invalidMobile.setVisibility(View.VISIBLE);
         }
         else if(password.length()<6){
             //password less than 6
 
-          binding.lettersError.setVisibility(View.VISIBLE);
-        } else if (password != confirmpass) {
+            binding.lettersError.setVisibility(View.VISIBLE);
+        } else if (!password.equals(confirmpass)) {
 
             binding.notMatch.setVisibility(View.VISIBLE);
 
@@ -101,6 +103,7 @@ public class Registration extends AppCompatActivity {
             firebaseSignup();
         }
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -114,12 +117,25 @@ public class Registration extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        progressDialog.dismiss();
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                        String email = firebaseUser.getEmail();
-                        Toast.makeText(Registration.this, "Your Account Has Been Created", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Registration.this,Home.class));
-                        finish();
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(mobile)
+                                .build();
+
+                        firebaseUser.updateProfile(profileUpdates)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        progressDialog.dismiss();
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(Registration.this, "Your Account Has Been Created", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(Registration.this,Home.class));
+                                            finish();
+                                        } else {
+                                            Toast.makeText(Registration.this, ""+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -131,6 +147,7 @@ public class Registration extends AppCompatActivity {
                     }
                 });
     }
+
 }
 
 

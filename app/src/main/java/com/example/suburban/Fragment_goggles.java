@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -39,6 +38,12 @@ public class Fragment_goggles extends Fragment {
 
     Query query = databaseReference.orderByChild("productType").equalTo("Goggles");
 
+
+
+
+
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -56,7 +61,6 @@ public class Fragment_goggles extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Get the clicked item position
-                Toast.makeText(requireContext(), "fsbvkfb", Toast.LENGTH_SHORT).show();
                addedProducts item = (addedProducts) parent.getAdapter().getItem(position);
                DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("products");
                databaseReference1.child(item.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -121,7 +125,6 @@ public class Fragment_goggles extends Fragment {
                 }
 
                 List<Fav_item> favItems = new ArrayList<>();
-
                 for (addedProducts products : dataList) {
                     Fav_item favItem = new Fav_item(
                             products.getId(),

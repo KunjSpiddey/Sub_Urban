@@ -1,64 +1,154 @@
 package com.example.suburban;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Fragment_Perfume#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Fragment_Perfume extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public Fragment_Perfume() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_Perfume.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Fragment_Perfume newInstance(String param1, String param2) {
-        Fragment_Perfume fragment = new Fragment_Perfume();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private MyAdapter adapter;
+    private GridView gridView;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private ArrayList<addedProducts> dataList = new ArrayList<>();
+    private List<WishListItem> wishListItems = new ArrayList<>(); // initialize wishListItems
+
+    final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("products");
+
+    Query query = databaseReference.orderByChild("productType").equalTo("Perfume");
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment__perfume, container, false);
+
+        View view = inflater.inflate(R.layout.fragment__perfume , container ,false);
+        gridView = view.findViewById(R.id.grid_view);
+
+        List<Fav_item> fav_items = new ArrayList<>();
+
+        adapter = new MyAdapter(getContext(), dataList, fav_items);
+        gridView.setAdapter(adapter);
+
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get the clicked item position
+                addedProducts item = (addedProducts) parent.getAdapter().getItem(position);
+                DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("products");
+                databaseReference1.child(item.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String name = snapshot.child("productName").getValue(String.class);
+                        String imageUri = snapshot.child("image_uri").getValue(String.class);
+                        String brand = snapshot.child("brand").getValue(String.class);
+                        String color = snapshot.child("color").getValue(String.class);
+                        String contains = snapshot.child("contains").getValue(String.class);
+                        String id = snapshot.child("id").getValue(String.class);
+                        String product_category = snapshot.child("productCategory").getValue(String.class);
+                        String deliverycharge = snapshot.child("productDeliveryCharge").getValue(String.class);
+                        String desc = snapshot.child("productDescription").getValue(String.class);
+                        String dprice = snapshot.child("productDiscountPrice").getValue(String.class);
+                        String oprice = snapshot.child("productOriginalPrice").getValue(String.class);
+                        String qnty = snapshot.child("productQuantity").getValue(String.class);
+                        String size = snapshot.child("productSize").getValue(String.class);
+                        String productType = snapshot.child("productType").getValue(String.class);
+                        String Return = snapshot.child("return").getValue(String.class);
+
+                        ItemDetailsFragment itemDetailsFragment = new ItemDetailsFragment();
+                        Bundle args = new Bundle();
+                        args.putString("name" , name);
+                        args.putString("image_uri" , imageUri);
+                        args.putString("brand" , brand);
+                        args.putString("color" , color);
+                        args.putString("contains" , contains);
+                        args.putString("id" , id);
+                        args.putString("product_category" , product_category);
+                        args.putString("deliverycharge" , deliverycharge);
+                        args.putString("desc" , desc);
+                        args.putString("dprice" , dprice);
+                        args.putString("oprice" , oprice);
+                        args.putString("qnty" , qnty);
+                        args.putString("size" , size);
+                        args.putString("productType" , productType);
+                        args.putString("Return" , Return);
+                        itemDetailsFragment.setArguments(args);
+
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.container, itemDetailsFragment).addToBackStack(null).commit();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dataList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    addedProducts add = dataSnapshot.getValue(addedProducts.class);
+                    dataList.add(add);
+
+                }
+
+                List<Fav_item> favItems = new ArrayList<>();
+                for (addedProducts products : dataList) {
+                    Fav_item favItem = new Fav_item(
+                            products.getId(),
+                            products.getProductName(),
+                            products.getImage_uri(),
+                            products.getProductOriginalPrice(),
+                            products.getProductDiscountPrice());
+                    fav_items.add(favItem);
+
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+
+        });
+
+
+
+
+
+
+
+        return view;
     }
 }

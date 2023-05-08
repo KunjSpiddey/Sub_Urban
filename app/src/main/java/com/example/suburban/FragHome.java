@@ -1,29 +1,21 @@
 package com.example.suburban;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
-import android.os.Handler;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.suburban.databinding.FragmentFragHomeBinding;
-import com.google.android.material.navigation.NavigationView;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 import java.util.ArrayList;
@@ -63,6 +55,7 @@ int i = 0;
         ImageView watch = view.findViewById(R.id.watch);
         ImageView bag = view.findViewById(R.id.bag);
         ImageView hat= view.findViewById(R.id.hat);
+        SearchView searchView = view.findViewById(R.id.searchView);
         Timer timer = new Timer();
 //        Handler handler = new Handler();
 
@@ -166,6 +159,32 @@ int i = 0;
                  });
 
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putString("query", query);
+                search_item fragment = new search_item();
+                fragment.setArguments(bundle);
+
+                // hide the keyboard before navigating to the new fragment
+                hideKeyboard();
+
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // do something when the text changes
+                return true;
+            }
+        });
+
+
+
         return view;
     }
 
@@ -178,6 +197,24 @@ int i = 0;
         ft.commit();
 
     }
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            View currentFocus = getActivity().getCurrentFocus();
+            if (currentFocus != null) {
+                imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SearchView searchView = getActivity().findViewById(R.id.searchView);
+        searchView.setQuery("", false);
+        searchView.clearFocus();
+    }
+
 
 }
 

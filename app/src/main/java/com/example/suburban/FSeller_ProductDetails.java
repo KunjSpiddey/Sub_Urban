@@ -210,6 +210,7 @@ public class FSeller_ProductDetails extends Fragment {
         progressDialog.setMessage("Adding product...");
         progressDialog.show();
 
+
         StorageReference storageReference = FirebaseStorage.getInstance().getReference("product_images");
         final StorageReference fileReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
         fileReference.putFile(uri)
@@ -217,13 +218,13 @@ public class FSeller_ProductDetails extends Fragment {
                     fileReference.getDownloadUrl().addOnSuccessListener(uri1 -> {
                         Image_uri = uri1.toString();
 
-                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("products");
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("admin_products");
                         String Id = databaseReference.push().getKey();
                         addedProducts product = new addedProducts(Id, Image_uri, productTitle, productDescription, productQuantity, productOriginalPrice, productDeliveryCharge, productSize, productDiscountPrice, productCategory, productType , productBrand , productcolor , productcontains , productReturn);
                         databaseReference.child(Id).setValue(product)
                                 .addOnSuccessListener(aVoid -> {
                                     progressDialog.dismiss();
-                                    Toast.makeText(getContext(), "Product added successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Wait Until accept by the SubUrban", Toast.LENGTH_SHORT).show();
                                     clearFields();
                                 })
                                 .addOnFailureListener(e -> {

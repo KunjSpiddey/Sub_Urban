@@ -21,11 +21,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+public class search_item extends Fragment {
 
-public class Fragment_Polo extends Fragment {
-
-    public Fragment_Polo() {
-
+    public search_item() {
+        // Required empty public constructor
     }
 
     private MyAdapter adapter;
@@ -36,25 +35,24 @@ public class Fragment_Polo extends Fragment {
 
     final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("products");
 
-    Query query = databaseReference.orderByChild("productType").equalTo("Polo T-shirt");
 
 
 
-
-
-
-
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment__polo, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_search_item , container ,false);
         gridView = view.findViewById(R.id.grid_view);
 
         List<Fav_item> fav_items = new ArrayList<>();
 
         adapter = new MyAdapter(getContext(), dataList, fav_items);
         gridView.setAdapter(adapter);
+        Bundle bundle = getArguments();
+        String value = bundle.getString("query");
+
+        Query query = databaseReference.orderByChild("productType").equalTo(value);
 
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -147,6 +145,12 @@ public class Fragment_Polo extends Fragment {
 
 
         });
+
+
+
+
+
+
 
         return view;
     }

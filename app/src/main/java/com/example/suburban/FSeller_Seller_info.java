@@ -1,32 +1,30 @@
 package com.example.suburban;
 
-import static com.example.suburban.R.array.india_states;
 import static com.example.suburban.R.array.default_City;
+import static com.example.suburban.R.array.india_states;
 
 import android.os.Bundle;
-
-import androidx.annotation.ContentView;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.ScrollingTabContainerView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.RadioButton;
+import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.suburban.databinding.FragmentFSellerSellerInfoBinding;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class FSeller_Seller_info extends Fragment {
-    String Selected_state , Selected_city;
+    String Selected_state;
     ArrayAdapter<CharSequence> city_adapter;
+
+    EditText name , address1 , address2 , A_name , account_number ,account_numberr, ifsc_code;
+    Button button;
+    Spinner city;
+    Spinner state;
     public FSeller_Seller_info() {
 
     }
@@ -35,10 +33,15 @@ public class FSeller_Seller_info extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.fragment_f_seller__seller_info, container, false);
-       Button button = (Button)view.findViewById(R.id.seller_info_next);
-       Spinner city = (Spinner)view.findViewById(R.id.city);
-       Spinner state = (Spinner)view.findViewById(R.id.state);
-
+       button = (Button)view.findViewById(R.id.seller_info_next);
+        city = (Spinner)view.findViewById(R.id.city);
+        state = (Spinner)view.findViewById(R.id.state);
+//        name = view.findViewById(R.id.name);
+//        address1 = view.findViewById(R.id.address1);
+//        address2 = view.findViewById(R.id.address2);
+//        A_name = view.findViewById(R.id.a_holder);
+//        account_number = view.findViewById(R.id.a_no);
+//        ifsc_code = view.findViewById(R.id.ifsc);
 
 String [] states_india = getResources().getStringArray(india_states);
 String [] default_city = getResources().getStringArray(default_City);

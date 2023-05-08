@@ -17,8 +17,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.razorpay.PaymentResultListener;
 
-public class Home extends AppCompatActivity{
+public class Home extends AppCompatActivity implements PaymentResultListener {
 //    ViewPager viewPager;
 
 //    WormDotsIndicator dot3;
@@ -32,6 +33,7 @@ public class Home extends AppCompatActivity{
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    boolean doubleBackToExitPressedOnce = false;
 
     ImageView addToCart , addFavorite;
     @Override
@@ -172,48 +174,14 @@ public class Home extends AppCompatActivity{
 
     }
 
-}
-
-/*
-
-if (!drawer.isDrawerOpen(GravityCompat.START)) {
-        drawer.openDrawer(GravityCompat.START);
-    } else if (doubleBackToExitPressedOnce) {
-        super.onBackPressed();
-    } else {
-        doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
-            }
-        }, 2000);
+    @Override
+    public void onPaymentSuccess(String s) {
+        Toast.makeText(this, "Payment successfull ", Toast.LENGTH_SHORT).show();
     }
-   //////////////////////////////////////////////
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- */
-
-
+    @Override
+    public void onPaymentError(int i, String s) {
+        Toast.makeText(this, "Payment Failed "+s, Toast.LENGTH_SHORT).show();
+    }
+}
 

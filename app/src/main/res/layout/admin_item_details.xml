@@ -101,15 +101,6 @@
                     android:textColor="#636363"
                     android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/off"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="0% off"
-                    android:textColor="@color/darkgreen"
-                    android:textSize="18sp" />
-
             </LinearLayout>
 
             <View
@@ -167,57 +158,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="#E8ECFF"
-                app:cardCornerRadius="5dp">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="4dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Shoulder-"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/shoulder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="18.7"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:text="|"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Chest-"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/Chest"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="18.7"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
+                app:cardCornerRadius="5dp"/>
 
 
             <androidx.cardview.widget.CardView
@@ -375,40 +316,40 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp"
+                android:padding="20dp"
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="35dp"
                 >
 
-
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/add_to_bag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/circle"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
-                    android:drawableLeft="@drawable/bag_details"
-                    android:text="Add to Bag"
-                    android:textAllCaps="false"
-                    android:backgroundTint="#EFEFEF"
-                    android:paddingLeft="20dp"
-                    android:layout_weight="1"
-                    android:paddingTop="10dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="10dp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/buy_now"
+                <Button
+                    android:id="@+id/decline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/circle"
-                    android:backgroundTint="#000000"
-                    android:text="Buy Now"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/black"
+                    android:drawableLeft="@drawable/baseline_close_24"
+                    android:backgroundTint="#959595"
+                    android:text="Reject"/>
+
+
+               <Button
+                   android:id="@+id/accept"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textAllCaps="false"
+                   android:layout_weight="1"
+                   android:layout_marginLeft="5dp"
+                   android:layout_marginRight="5dp"
+                   android:backgroundTint="@color/black"
+                   android:textColor="@color/white"
+                   android:drawableLeft="@drawable/baseline_check_24"
+                   android:text="Accecpt"/>
+
+
+
 
 
             </LinearLayout>
@@ -421,86 +362,6 @@
                 android:background="@color/light_grey"
                 android:backgroundTint="@color/light_grey" />
 
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
-
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/crowd" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/genuineproduct" />
-
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/goodquality" />
-
-                </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Happy\nCustomers"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:text="Genuine\nProduct"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:text="Quality\nChecked"/>
-
-        </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/light_grey"
-                android:backgroundTint="@color/light_grey" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -559,7 +420,7 @@
 
 
 
-            </LinearLayout>
+        </LinearLayout>
 
 
 

@@ -49,10 +49,11 @@ TextView new_acc;
     private void fl(Fragment fragment, int flag) {
         FragmentManager fm = getParentFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.seller_container, fragment);
         ft.replace(R.id.seller_container, fragment);
         ft.addToBackStack(null);
         ft.commit();
     }
+
+
 
 }
