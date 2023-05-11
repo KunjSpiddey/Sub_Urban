@@ -135,7 +135,7 @@ public class Login_Activity extends AppCompatActivity {
 
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                         String email = firebaseUser.getEmail();
-                        Toast.makeText(Login_Activity.this, "Logged in"+email, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login_Activity.this, "Succesfully Logged In", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(Login_Activity.this,Home.class));
                         finish();
                     }

@@ -2,9 +2,79 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:backgroundTint="#E1DAFF"
+    android:background="#A6A6A6"
     android:layout_height="match_parent"
     tools:context=".Cart_Fragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <!-- Total Amount TextView -->
+        <TextView
+            android:id="@+id/total_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bag (2 products)"
+            android:padding="16dp" />
+
+        <!-- RecyclerView for Cart Items -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cart_items_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/total_item"
+            android:padding="16dp" />
+
+        <!-- Bottom LinearLayout -->
+        <LinearLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                android:background="#E1DAFF"
+                android:backgroundTint="#C1B2FF" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/total_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_weight="1"
+                    android:text="Rs.3,050"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/checkout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Checkout"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:textAllCaps="false"
+                    android:layout_marginEnd="20dp"
+                    android:textSize="16sp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="@color/black"
+                    android:background="@drawable/button" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </FrameLayout>

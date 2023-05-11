@@ -3,7 +3,9 @@ package com.example.suburban;
 import static com.example.suburban.R.array.default_City;
 import static com.example.suburban.R.array.india_states;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,23 +14,36 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class FSeller_Seller_info extends Fragment {
     String Selected_state;
     ArrayAdapter<CharSequence> city_adapter;
 
-    EditText name , address1 , address2 , A_name , account_number ,account_numberr, ifsc_code;
+    EditText name , address1 , address2 , A_name , account_number ,re_enter_number, ifsc_code;
     Button button;
     Spinner city;
     Spinner state;
+
+    private ProgressDialog progressDialog;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore db;
     public FSeller_Seller_info() {
 
     }
 
+    String NAME , ADDRESS1 , ADDRESS2 , A_NAME , ACCOUNT_NUMBER , RE_ENTER_NUMBER , IFSC_CODE , CITY , STATE ;
+    String ADDRESS;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,12 +51,16 @@ public class FSeller_Seller_info extends Fragment {
        button = (Button)view.findViewById(R.id.seller_info_next);
         city = (Spinner)view.findViewById(R.id.city);
         state = (Spinner)view.findViewById(R.id.state);
-//        name = view.findViewById(R.id.name);
-//        address1 = view.findViewById(R.id.address1);
-//        address2 = view.findViewById(R.id.address2);
-//        A_name = view.findViewById(R.id.a_holder);
-//        account_number = view.findViewById(R.id.a_no);
-//        ifsc_code = view.findViewById(R.id.ifsc);
+        name = view.findViewById(R.id.name);
+        address1 = view.findViewById(R.id.address1);
+        address2 = view.findViewById(R.id.address2);
+        A_name = view.findViewById(R.id.a_holder);
+        account_number = view.findViewById(R.id.a_no);
+        re_enter_number = view.findViewById(R.id.ra_no);
+        ifsc_code = view.findViewById(R.id.ifsc);
+
+
+
 
 String [] states_india = getResources().getStringArray(india_states);
 String [] default_city = getResources().getStringArray(default_City);
@@ -77,7 +96,7 @@ String [] westbengal = getResources().getStringArray(R.array.west_bengal_cities)
 
 
 
-
+firebaseAuth = FirebaseAuth.getInstance();
 
 
         ArrayAdapter<CharSequence> state_adapter = new ArrayAdapter(getContext(), androidx.transition.R.layout.support_simple_spinner_dropdown_item,states_india);
@@ -201,14 +220,86 @@ String [] westbengal = getResources().getStringArray(R.array.west_bengal_cities)
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-           fl(new FSeller_ProductDetails(),1);
+                if (TextUtils.isEmpty(name.getText().toString().trim())) {
+                    name.setError("Name is required");
+                } else if (TextUtils.isEmpty(address1.getText().toString().trim())) {
+                    address1.setError("Address is required");
+                } else if (TextUtils.isEmpty(A_name.getText().toString().trim())) {
+                    A_name.setError("Account holder name is required");
+                } else if (TextUtils.isEmpty(account_number.getText().toString().trim())) {
+                    account_number.setError("Account number is required");
+                } else if (TextUtils.isEmpty(re_enter_number.getText().toString().trim())) {
+                    re_enter_number.setError("Please re-enter the account number");
+                } else if (!account_number.getText().toString().trim().equals(re_enter_number.getText().toString().trim())) {
+                    re_enter_number.setError("Account numbers do not match");
+                } else if (TextUtils.isEmpty(ifsc_code.getText().toString().trim())) {
+                    ifsc_code.setError("IFSC code is required");
+                } else if (city.getSelectedItem().toString().equals("Select City")) {
+                    Toast.makeText(getContext(), "Please select a city", Toast.LENGTH_SHORT).show();
+                } else if (state.getSelectedItem().toString().equals("Select State")) {
+                    Toast.makeText(getContext(), "Please select a state", Toast.LENGTH_SHORT).show();
+                } else {
+                    // All fields are valid, proceed with further logic
+                    NAME = name.getText().toString().trim();
+                    ADDRESS1 = address1.getText().toString().trim();
+                    ADDRESS2 = address2.getText().toString().trim();
+                    A_NAME = A_name.getText().toString().trim();
+                    ACCOUNT_NUMBER = account_number.getText().toString().trim();
+                    RE_ENTER_NUMBER = re_enter_number.getText().toString().trim();
+                    IFSC_CODE = ifsc_code.getText().toString().trim();
+                    CITY = city.getSelectedItem().toString();
+                    STATE = state.getSelectedItem().toString();
+                    ADDRESS = ADDRESS1 + " " + ADDRESS2;
+
+                    final ProgressDialog progressDialog = new ProgressDialog(getContext());
+
+                    insertData();
+                }
             }
         });
 
 
 
+
+
+
+
         return view;
     }
+
+    private void insertData() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> data = new HashMap<>();
+        data.put("name", NAME);
+        data.put("address", ADDRESS);
+        data.put("city", CITY);
+        data.put("state", STATE);
+        data.put("Acc_Holder_Name", A_NAME);
+        data.put("Acc_number", ACCOUNT_NUMBER);
+        data.put("ifsc", IFSC_CODE);
+
+        ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Uploading data, please wait...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        db.collection("seller").add(data)
+                .addOnSuccessListener(documentReference -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(getContext(), "Information saved", Toast.LENGTH_SHORT).show();
+                    // Check if the Firestore write operation was successful
+                    if (documentReference != null) {
+                        fl(new FSeller_ProductDetails(), 1);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(getContext(), "Error Occurred", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+
 
     private void fl(Fragment fragment, int flag) {
         FragmentManager fm = getParentFragmentManager();
@@ -218,4 +309,5 @@ String [] westbengal = getResources().getStringArray(R.array.west_bengal_cities)
         ft.addToBackStack(null);
         ft.commit();
     }
+
 }

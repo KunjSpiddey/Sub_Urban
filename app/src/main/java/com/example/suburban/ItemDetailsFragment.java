@@ -3,6 +3,7 @@ package com.example.suburban;
 import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,19 +27,28 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class ItemDetailsFragment extends Fragment implements PaymentResultListener {
 
 private ImageView img;
 private TextView brand1 , title1 , oprice1 , dprice1 , off1 , color1 , size1 , contains1 , desc1 , Return1 , category1 , producttype1 ,dc , Color;
 String email;
 AppCompatButton add_to_cart , buy_now;
+    private Context context;
 
+    AddToCartDatabase adb;
 WislhListDataBase db;
+
+    private ArrayList<addedProducts> dataList;
 
     public ItemDetailsFragment() {
         // Required empty public constructor
     }
 
+    public void setDataList(ArrayList<addedProducts> dataList) {
+        this.dataList = dataList;
+    }
 
 
     @Override
@@ -165,6 +177,27 @@ WislhListDataBase db;
         });
 
 
+        add_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (add_to_cart.getText().toString().equals("Add to Bag")) {
+                    adb = new AddToCartDatabase(requireContext());
+                    addtoproductsITEM item = new addtoproductsITEM(id, name, brand, dprice, oprice, image_uri, size);
+                    adb.insertData(item);
+                    add_to_cart.setText("Go to Cart");
+                } else if (add_to_cart.getText().toString().equals("Go to Cart")) {
+                    // Open the Cart_Fragment
+                    Fragment cartFragment = new Cart_Fragment();
+                    fl(cartFragment, 1);
+                }
+            }
+        });
+
+
+
+
+
+
 
 
         return view;
@@ -179,5 +212,14 @@ WislhListDataBase db;
     @Override
     public void onPaymentError(int i, String s) {
         Toast.makeText(getContext(), "Failed"+s, Toast.LENGTH_SHORT).show();
+    }
+
+    private void fl(Fragment fragment, int flag) {
+        FragmentManager fm = getParentFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.container, fragment);
+        ft.replace(R.id.container, fragment);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 }
