@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,13 +32,16 @@ import java.util.ArrayList;
 
 public class ItemDetailsFragment extends Fragment implements PaymentResultListener {
 
-private ImageView img;
+    private  String IDD;
+    private ImageView img;
 private TextView brand1 , title1 , oprice1 , dprice1 , off1 , color1 , size1 , contains1 , desc1 , Return1 , category1 , producttype1 ,dc , Color;
 String email;
 AppCompatButton add_to_cart , buy_now;
     private Context context;
 
     AddToCartDatabase adb;
+    SharedPreferences sharedPrefs;
+
 WislhListDataBase db;
 
     private ArrayList<addedProducts> dataList;
@@ -59,11 +63,14 @@ WislhListDataBase db;
 
 
 
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_details, container, false);
-
+        sharedPrefs = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         add_to_cart = view.findViewById(R.id.add_to_bag);
         buy_now = view.findViewById(R.id.buy_now);
         img = view.findViewById(R.id.detail_image);
@@ -111,8 +118,10 @@ WislhListDataBase db;
         category1.setText("Category - " + product_category);
         dc.setText("Delivery Charge - " + deliverycharge);
         desc1.setText(desc);
-        dprice1.setText(dprice);
-        oprice1.setText(oprice);
+        double Dprice = Double.parseDouble(dprice);
+        double Oprice = Double.parseDouble(oprice);
+        dprice1.setText(String.format("₹ %.2f",Dprice));
+        oprice1.setText(String.format("₹ %.2f",Oprice));
         size1.setText(size);
         producttype1.setText("Product Type - " + productType);
         Return1.setText(Return);
@@ -175,16 +184,23 @@ WislhListDataBase db;
                 }
             }
         });
+        addtoproductsITEM item = new addtoproductsITEM(id, name, brand, dprice, oprice, image_uri, size);
+        IDD = item.getId();
+    String buttonText = retrieveButtonText(IDD);
+    add_to_cart.setText(buttonText);
 
-
+//       String ID = "";
         add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (add_to_cart.getText().toString().equals("Add to Bag")) {
+                    // Add the item to the database
                     adb = new AddToCartDatabase(requireContext());
-                    addtoproductsITEM item = new addtoproductsITEM(id, name, brand, dprice, oprice, image_uri, size);
                     adb.insertData(item);
+                    // Change the button text to "Go to Cart"
                     add_to_cart.setText("Go to Cart");
+                    // Update the shared preference to reflect the change in button text
+                    saveButtonText(IDD,"Go to Cart");
                 } else if (add_to_cart.getText().toString().equals("Go to Cart")) {
                     // Open the Cart_Fragment
                     Fragment cartFragment = new Cart_Fragment();
@@ -196,13 +212,8 @@ WislhListDataBase db;
 
 
 
-
-
-
-
         return view;
     }
-
 
     @Override
     public void onPaymentSuccess(String s) {
@@ -213,6 +224,20 @@ WislhListDataBase db;
     public void onPaymentError(int i, String s) {
         Toast.makeText(getContext(), "Failed"+s, Toast.LENGTH_SHORT).show();
     }
+
+    private void saveButtonText(String id, String text) {
+        SharedPreferences.Editor editor = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit();
+        editor.putString("buttonText_" + id, text);
+        editor.apply();
+    }
+
+
+    private String retrieveButtonText(String id) {
+        SharedPreferences prefs = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        return prefs.getString("buttonText_" + id, "Add to Bag");
+    }
+
+
 
     private void fl(Fragment fragment, int flag) {
         FragmentManager fm = getParentFragmentManager();

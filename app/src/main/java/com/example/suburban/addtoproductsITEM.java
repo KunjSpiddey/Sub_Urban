@@ -11,6 +11,9 @@ public class addtoproductsITEM {
     String image_uri;
     String size;
 
+    public addtoproductsITEM() {
+    }
+
     public addtoproductsITEM(String id, String name, String brand, String dprice, String oprice, String image_uri, String size) {
         this.id = id;
         this.name = name;
@@ -76,4 +79,9 @@ public class addtoproductsITEM {
     public void setSize(String size) {
         this.size = size;
     }
+
+
+
+
+
 }

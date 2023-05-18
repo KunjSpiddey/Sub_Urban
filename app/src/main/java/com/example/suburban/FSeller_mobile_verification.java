@@ -22,8 +22,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Locale;
-
-
 public class FSeller_mobile_verification extends Fragment {
 
     TextView new_acc;
@@ -67,6 +65,19 @@ public class FSeller_mobile_verification extends Fragment {
                 String email = login.getText().toString().trim();
                 String pass = password.getText().toString().trim();
 
+                // Check if email and password are empty
+                if (email.isEmpty()) {
+                    login.setError("Email cannot be empty");
+                    login.requestFocus();
+                    return;
+                }
+
+                if (pass.isEmpty()) {
+                    password.setError("Password cannot be empty");
+                    password.requestFocus();
+                    return;
+                }
+
                 mFirestore.collection("seller_login")
                         .whereEqualTo("Mail", email)
                         .whereEqualTo("Password", pass)
@@ -81,10 +92,12 @@ public class FSeller_mobile_verification extends Fragment {
                                         Toast.makeText(getContext(), "Succesfully Logged In", Toast.LENGTH_SHORT).show();
                                         fl(new FSeller_Seller_info(),1);
                                     } else {
+                                        progressDialog.dismiss();
                                         // Invalid credentials, show error message
                                         Toast.makeText(getActivity(), "Invalid email or password", Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
+                                    progressDialog.dismiss();
                                     // Query failed, show error message
                                     Toast.makeText(getActivity(), "Error: Failed to retrieve user data", Toast.LENGTH_SHORT).show();
                                 }
@@ -105,4 +118,3 @@ public class FSeller_mobile_verification extends Fragment {
         ft.commit();
     }
 }
-

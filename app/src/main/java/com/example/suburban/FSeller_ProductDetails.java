@@ -257,7 +257,7 @@ public class FSeller_ProductDetails extends Fragment {
         Return.setSelection(0);
         contains.setText("");
         color.setText("");
-        img.setImageResource(R.drawable.seller);
+        img.setImageResource(R.drawable.baseline_image_24);
         brand.setText("");
     }
 

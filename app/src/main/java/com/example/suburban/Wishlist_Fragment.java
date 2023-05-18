@@ -31,6 +31,7 @@ public class Wishlist_Fragment extends Fragment {
         gridView = view.findViewById(R.id.wishlist_grid_view);
         WislhListDataBase db = new WislhListDataBase(getContext());
         ArrayList<WishListItem> wishListItems = (ArrayList<WishListItem>) db.getAllItems();
+        ArrayList<addedProducts> addedProductsList = new ArrayList<>();
         WishListAdapter wishListAdapter = new WishListAdapter(getContext(),wishListItems);
         gridView.setAdapter(wishListAdapter);
 
@@ -40,6 +41,7 @@ public class Wishlist_Fragment extends Fragment {
 
         return view;
     }
+
 
     }
 

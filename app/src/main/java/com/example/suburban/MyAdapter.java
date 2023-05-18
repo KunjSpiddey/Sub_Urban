@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class MyAdapter extends BaseAdapter {
 
     private List<Fav_item> fav_items;
@@ -70,7 +69,7 @@ public class MyAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.grid_item, null);
             holder = new ViewHolder();
             holder.item_image = view.findViewById(R.id.gridImage);
-            holder.item_name = (TextView) view.findViewById(R.id.Product_Name);
+            holder.item_name = view.findViewById(R.id.Product_Name);
             holder.o_price = view.findViewById(R.id.original_price);
             holder.d_price = view.findViewById(R.id.discount_price);
             holder.fav = view.findViewById(R.id.fav_check);
@@ -83,13 +82,14 @@ public class MyAdapter extends BaseAdapter {
 
         Glide.with(context).load(product.getImage_uri()).into(holder.item_image);
         holder.item_name.setText(product.getProductName());
-        holder.o_price.setText("₹" + product.getProductOriginalPrice());
-        holder.d_price.setText("₹" + product.getProductDiscountPrice());
+        double originalPrice = Double.parseDouble(product.getProductOriginalPrice());
+        double discountPrice = Double.parseDouble(product.getProductDiscountPrice());
+        holder.o_price.setText(String.format("₹ %.2f", originalPrice));
+        holder.d_price.setText(String.format("₹ %.2f", discountPrice));
 
         boolean isChecked = false;
-        if (!deleteClicked) {
-            isChecked = sharedPreferences.getBoolean("checkbox_" + product.getId(), false);
-        }
+
+
         holder.fav.setChecked(isChecked);
 
         holder.fav.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -99,15 +99,16 @@ public class MyAdapter extends BaseAdapter {
                 editor.putBoolean("checkbox_" + product.getId(), b);
                 editor.apply();
 
-                WishListItem item = new WishListItem(product.getId(), product.getProductName(),product.getImage_uri(),product.getProductOriginalPrice(),product.getProductDiscountPrice());
                 if (b) {
+                    // Add the item to the wishlist database
+                    WishListItem item = new WishListItem(product.getId(), product.getProductName(), product.getImage_uri(), product.getProductOriginalPrice(), product.getProductDiscountPrice());
                     db.insertData(item);
                 } else {
-                    db.deleteData(item.getId());
+                    // Remove the item from the wishlist database
+                    db.deleteData(product.getId());
                 }
             }
         });
-
 
         if (deleteClicked) {
             holder.fav.setChecked(false);
@@ -119,10 +120,18 @@ public class MyAdapter extends BaseAdapter {
         return view;
     }
 
+    public void setDataList(ArrayList<addedProducts> dataList) {
+        this.dataList = dataList;
+        notifyDataSetChanged();
+    }
+
+
     private static class ViewHolder {
         View itemView;
         ImageView item_image;
-        TextView item_name, o_price, d_price;
+        TextView item_name;
+        TextView o_price;
+        TextView d_price;
         CheckBox fav;
     }
 }

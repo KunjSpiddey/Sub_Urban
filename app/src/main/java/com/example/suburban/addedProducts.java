@@ -173,5 +173,24 @@ public class addedProducts {
         this.productType = productType;
     }
 
+    public addedProducts build() {
+        addedProducts item = new addedProducts();
+        item.setProductName(productName);
+        item.setImage_uri(Image_uri);
+        item.setBrand(brand);
+        item.setColor(color);
+        item.setContains(Contains);
+        item.setId(Id);
+        item.setProductCategory(productCategory);
+        item.setProductDeliveryCharge(productDeliveryCharge);
+        item.setProductDescription(productDescription);
+        item.setProductDiscountPrice(productDiscountPrice);
+        item.setProductOriginalPrice(productOriginalPrice);
+        item.setProductQuantity(productQuantity);
+        item.setProductSize(productSize);
+        item.setProductType(productType);
+        item.setReturn(Return);
+        return item;
+    }
 
 }

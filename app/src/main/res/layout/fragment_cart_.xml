@@ -7,43 +7,45 @@
     android:layout_height="match_parent"
     tools:context=".Cart_Fragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <!-- Total Amount TextView -->
         <TextView
             android:id="@+id/total_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bag (2 products)"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:text="Bag (2 products)" />
 
         <!-- RecyclerView for Cart Items -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cart_items_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/total_item"
-            android:padding="16dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <!-- Bottom LinearLayout -->
         <LinearLayout
             android:id="@+id/bottom_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:orientation="vertical">
+
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="5dp"
+                android:layout_height="2dp"
                 android:background="#E1DAFF"
                 android:backgroundTint="#C1B2FF" />
 
             <LinearLayout
+                android:id="@+id/linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/light_blue"
+                android:backgroundTint="@color/blue"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
@@ -54,27 +56,27 @@
                     android:layout_marginLeft="40dp"
                     android:layout_weight="1"
                     android:text="Rs.3,050"
-                    android:textStyle="bold"
                     android:textColor="#000000"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/checkout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Checkout"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="@color/black"
                     android:paddingLeft="30dp"
                     android:paddingRight="30dp"
+                    android:text="Checkout"
                     android:textAllCaps="false"
-                    android:layout_marginEnd="20dp"
-                    android:textSize="16sp"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="@color/black"
-                    android:background="@drawable/button" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </FrameLayout>
