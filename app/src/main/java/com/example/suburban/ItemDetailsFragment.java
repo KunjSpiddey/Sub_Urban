@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -21,6 +22,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import com.squareup.picasso.Picasso;
@@ -36,6 +42,8 @@ public class ItemDetailsFragment extends Fragment implements PaymentResultListen
     private ImageView img;
 private TextView brand1 , title1 , oprice1 , dprice1 , off1 , color1 , size1 , contains1 , desc1 , Return1 , category1 , producttype1 ,dc , Color;
 String email;
+
+String IDDDDDD;
 AppCompatButton add_to_cart , buy_now;
     private Context context;
 
@@ -100,6 +108,7 @@ WislhListDataBase db;
         String color = args.getString("color");
         String contains = args.getString("contains");
         String id = args.getString("id");
+        IDDDDDD = id;
         String product_category = args.getString("product_category");
         String deliverycharge = args.getString("deliverycharge");
         String desc = args.getString("desc");
@@ -140,9 +149,10 @@ WislhListDataBase db;
                 // on below line we are getting
                 // amount that is entered by user.
                 String samount = dprice1.getText().toString();
+                String numericAmount = samount.replaceAll("[^\\d.]", ""); // Remove non-numeric characters
+                float parsedAmount = Float.parseFloat(numericAmount);
+                int amount = Math.round(parsedAmount * 100);
 
-                // rounding off the amount.
-                int amount = Math.round(Float.parseFloat(samount) * 100);
 
                 // initialize Razorpay account.
                 Checkout checkout = new Checkout();
@@ -247,4 +257,41 @@ WislhListDataBase db;
         ft.addToBackStack(null);
         ft.commit();
     }
+
+
+
+    public void seller (){
+        String id = IDDDDDD;
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("products");
+        databaseReference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String sellerId = snapshot.child("randomKey").getValue(String.class);
+                dashboard_seller dashboard_seller = new dashboard_seller(id , sellerId);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+
+
+
+        // get the item id
+        //  get the seller id
+        // with the help of seller id we will send the data to the seller dashboard with our adapter
+
+    }
+
+
+
+
+
 }

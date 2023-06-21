@@ -216,9 +216,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:background="@drawable/border"
+                android:paddingLeft="5dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="5dp"
                 android:textSize="18sp" />
 
             <TextView
@@ -233,9 +234,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:background="@drawable/border"
+                android:paddingLeft="5dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="5dp"
                 android:textSize="18sp" />
 
 
@@ -298,7 +300,8 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/border"
                 android:maxLines="10"
-                android:paddingTop="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="8dp"
                 android:paddingBottom="5dp"
                 android:textSize="18sp" />
 
@@ -314,10 +317,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:inputType="number"
+                android:paddingLeft="5dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="5dp"
                 android:textSize="18sp" />
 
 
@@ -333,10 +337,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:inputType="number"
+                android:paddingLeft="5dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="5dp"
                 android:textSize="18sp" />
 
 
@@ -352,9 +357,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:background="@drawable/border"
+                android:paddingLeft="5dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="5dp"
                 android:textSize="18sp" />
 
 
@@ -370,10 +376,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:inputType="number"
+                android:paddingLeft="5dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="5dp"
                 android:textSize="18sp" />
 
             <TextView
@@ -410,10 +417,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:inputType="number"
+                android:paddingLeft="5dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="5dp"
                 android:textSize="18sp" />
 
             <TextView
@@ -429,9 +437,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/border"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:inputType="number"
+                android:paddingLeft="5dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="5dp"
                 android:textSize="18sp" />
 
 
@@ -447,11 +456,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:background="@drawable/border"
                 android:inputType="number"
-                android:textSize="24sp" />
+                android:paddingLeft="5dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="5dp"
+                android:textSize="20sp" />
 
 
             <androidx.appcompat.widget.AppCompatButton

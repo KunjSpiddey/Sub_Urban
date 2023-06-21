@@ -31,6 +31,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -44,12 +48,19 @@ public class FSeller_ProductDetails extends Fragment {
     private ProgressDialog progressDialog;
     private Uri imageUri;
 
+
+   FirebaseFirestore fb = FirebaseFirestore.getInstance();
+
+   CollectionReference collectionReference = fb.collection("seller_login");
+
+
     ProgressBar progressBar;
     ImageView img;
     EditText pname , desc , discount_price , size , quantity , d_charge , original_price , brand , color , contains;
     Spinner category , p_type , Return;
     AppCompatButton add_product;
 
+    String randomKey;
     String rt [] = {
             "Available",
             "Not-Available"
@@ -87,6 +98,24 @@ public class FSeller_ProductDetails extends Fragment {
      progressDialog.setCanceledOnTouchOutside(false);
 
 
+     collectionReference.get().addOnCompleteListener(task -> {
+         if (task.isSuccessful()){
+             QuerySnapshot querySnapshot = task.getResult();
+             if (querySnapshot != null && !querySnapshot.isEmpty()){
+                 for (DocumentSnapshot document : querySnapshot.getDocuments()){
+                      randomKey = document.getId();
+                 }
+
+
+             }
+             else {
+                 Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+             }
+         }
+         else {
+             Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+         }
+     });
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),

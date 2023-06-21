@@ -24,6 +24,8 @@ public class addedProducts {
    String Contains;
    String Return;
 
+   String randomKey;
+
     public addedProducts(String Id ,String Image_uri, String productName, String productDescription, String productQuantity, String productOriginalPrice, String productDeliveryCharge, String productSize, String productDiscountPrice
             , String productCategory, String productType, String brand , String color , String contains , String Return) {
 
@@ -42,11 +44,20 @@ public class addedProducts {
         this.productType = productType;
         this.Image_uri = Image_uri;
         this.brand = brand;
+        this.randomKey = randomKey;
 
     }
 
     public addedProducts() {
 
+    }
+
+    public String getRandomKey() {
+        return randomKey;
+    }
+
+    public void setRandomKey(String randomKey) {
+        this.randomKey = randomKey;
     }
 
     public String getColor() {

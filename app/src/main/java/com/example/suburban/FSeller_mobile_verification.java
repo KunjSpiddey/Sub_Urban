@@ -90,7 +90,7 @@ public class FSeller_mobile_verification extends Fragment {
                                     if (querySnapshot != null && !querySnapshot.isEmpty()) {
                                         progressDialog.dismiss();
                                         Toast.makeText(getContext(), "Succesfully Logged In", Toast.LENGTH_SHORT).show();
-                                        fl(new FSeller_Seller_info(),1);
+                                        fl(new FSeller_ProductDetails(),1);
                                     } else {
                                         progressDialog.dismiss();
                                         // Invalid credentials, show error message
