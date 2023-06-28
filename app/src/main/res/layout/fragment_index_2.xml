@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".FragmentIndex_2">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <GridView
+        android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:clickable="true"
+        android:focusable="true"
+        android:descendantFocusability="blocksDescendants"
+        android:numColumns="2"
+        />
 </FrameLayout>

@@ -211,7 +211,7 @@
                     android:id="@+id/view_pager"
                     android:layout_width="wrap_content"
                     android:layout_height="250dp"
-                    android:background="#FFFFFF"
+                    android:background="#EBEDF6"
                     android:elevation="10dp"
                     android:padding="-50dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -293,10 +293,10 @@
                                 app:cardMaxElevation="5dp">
 
                                 <ImageView
-                                    android:id="@+id/belt"
+                                    android:id="@+id/wallet"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    app:srcCompat="@drawable/dior" />
+                                    app:srcCompat="@drawable/adior" />
                             </androidx.cardview.widget.CardView>
 
                             <androidx.cardview.widget.CardView
@@ -335,7 +335,7 @@
                                 app:cardMaxElevation="5dp">
 
                                 <ImageView
-                                    android:id="@+id/watch"
+                                    android:id="@+id/turtle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     app:srcCompat="@drawable/lv" />
@@ -356,7 +356,7 @@
                                     android:id="@+id/hat"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    app:srcCompat="@drawable/chanel" />
+                                    app:srcCompat="@drawable/btie" />
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>
                     </LinearLayout>

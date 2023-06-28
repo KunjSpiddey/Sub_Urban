@@ -22,10 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmentIndex_3 extends Fragment {
+public class Turtle extends Fragment {
 
-
-    public FragmentIndex_3() {
+    public Turtle() {
         // Required empty public constructor
     }
 
@@ -38,7 +37,7 @@ public class FragmentIndex_3 extends Fragment {
 
     final private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("products");
 
-    Query query = databaseReference.orderByChild("productType").equalTo("Perfume");
+    Query query = databaseReference.orderByChild("productType").equalTo("Turtle Neck T-shirt");
 
 
 
@@ -49,7 +48,7 @@ public class FragmentIndex_3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_index_3, container, false);
+        View view = inflater.inflate(R.layout.fragment_turtle, container, false);
 
         gridView = view.findViewById(R.id.grid_view);
 

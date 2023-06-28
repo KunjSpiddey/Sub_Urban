@@ -51,10 +51,10 @@ int i = 0;
         ImageView shoes = view.findViewById(R.id.shoes);
         ImageView tie = view.findViewById(R.id.tie);
         ImageView goggles = view.findViewById(R.id.goggles);
-        ImageView belt = view.findViewById(R.id.belt);
-        ImageView watch = view.findViewById(R.id.watch);
-        ImageView bag = view.findViewById(R.id.bag);
-        ImageView hat= view.findViewById(R.id.hat);
+        ImageView wallet = view.findViewById(R.id.wallet);
+        ImageView turtle = view.findViewById(R.id.turtle);
+        ImageView shoe = view.findViewById(R.id.bag);
+        ImageView tiees= view.findViewById(R.id.hat);
         SearchView searchView = view.findViewById(R.id.searchView);
         Timer timer = new Timer();
 //        Handler handler = new Handler();
@@ -64,8 +64,9 @@ int i = 0;
         List<Integer> images = new ArrayList<>();
         images.add(R.drawable.show);
         images.add(R.drawable.tuxeda);
-        images.add(R.drawable.winter);
+        images.add(R.drawable.iperfume);
         images.add(R.drawable.man);
+        images.add(R.drawable.iwatch);
         images.add(R.drawable.shoess);
 
         ViewAdapter viewAdapter = new ViewAdapter(images);
@@ -158,6 +159,33 @@ int i = 0;
                      }
                  });
 
+                 wallet.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         fl(new Wallet(),1);
+                     }
+                 });
+
+                 turtle.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         fl(new Turtle(),1);
+                     }
+                 });
+
+                 shoe.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         fl(new Fragment_Shoes(),1);
+                     }
+                 });
+
+                 tiees.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         fl(new Fragment_tie(),1);
+                     }
+                 });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

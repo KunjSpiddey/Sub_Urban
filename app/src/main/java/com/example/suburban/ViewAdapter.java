@@ -1,24 +1,16 @@
 package com.example.suburban;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -30,7 +22,7 @@ public class ViewAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer[] images={R.drawable.show,R.drawable.tuxeda,R.drawable.show,R.drawable.man,R.drawable.shoess};
+    private Integer[] images={R.drawable.show,R.drawable.tuxeda,R.drawable.iperfume,R.drawable.man,R.drawable.ishoes,R.drawable.iwatch};
 
 
 
@@ -82,6 +74,9 @@ public class ViewAdapter extends PagerAdapter {
                       break;
                   case 4:
                       fragmentLoader(new FragmentIndex_5(),1, view);
+                      break;
+                  case 5:
+                      fragmentLoader(new FrgamentIndex_6(),1, view);
                       break;
               }
             }

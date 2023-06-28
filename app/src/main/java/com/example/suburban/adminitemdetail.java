@@ -109,6 +109,7 @@ public class adminitemdetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 databaseRef.child("admin_products").child(id).removeValue();
+                startActivity(new Intent(adminitemdetail.this, Admin.class));
             }
         });
 

@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentIndex_5">
+    tools:context=".Turtle">
 
+    <!-- TODO: Update blank fragment layout -->
     <GridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
